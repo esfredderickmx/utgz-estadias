@@ -1,0 +1,79 @@
+.ui.secondary.inverted.pointing.menu {
+  border-width: 0px;
+}
+
+.masthead h1.ui.header {
+  margin-top: 3em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+.masthead.segment {
+  min-height: 700px;
+  padding: 1em 0em;
+  background-image: url('../img/students.jpg') !important;
+  background-size: cover !important;
+  background-blend-mode: overlay !important;
+  background-position: left !important;
+}
+
+.ui.vertical.stripe h3 {
+  font-size: 2em;
+}
+
+.ui.vertical.stripe p {
+  font-size: 1.33em;
+}
+
+.ui.vertical.stripe .horizontal.divider {
+  margin: 3em 0em;
+}
+
+/* 
+ * Semantic UI Scrollbar
+ *
+ * This CSS code will stylize the scrollbar of a website which uses Semantic UI.
+ * The goal is to make the scrollbar appear to be part of the Semantic UI elements.
+ */
+
+/* Set the scrollbar width and height */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Set the scrollbar track color */
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+/* Set the scrollbar thumb color */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+
+/* Set the scrollbar thumb color on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4c4f52;
+}
+
+/* Set the scrollbar thumb cursor */
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
