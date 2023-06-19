@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>@yield('title', isset($title) ? $title : '') | Citrogambas</title>
+	<title>@yield('title', isset($title) ? $title : '') | Control de Estadías</title>
 	<link type="text/css" href="{{ asset('css/semantic.min.css') }}" rel="stylesheet">
 	<link type="text/css" href="{{ asset('css/styles.css') }}" rel="stylesheet">
 	@livewireStyles
