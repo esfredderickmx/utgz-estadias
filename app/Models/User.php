@@ -21,10 +21,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'area_id',
         'career_id',
         'first_name',
         'last_name',
         'email',
+        'control_number',
         'password',
         'phone',
         'type',
@@ -53,6 +55,10 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value) {
       $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function area(): BelongsTo {
+      return $this->belongsTo(Area::class);
     }
 
     public function career(): BelongsTo {

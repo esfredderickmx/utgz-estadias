@@ -28,7 +28,7 @@
 				<div class="menu">
 					<div class="header">Mi cuenta</div>
 					<a class="item"><i class="user icon outline"></i>Perfil de usuario</a>
-					@if (Auth::user()->role === 'admin' || Auth::user()->role === 'manager')
+					@if (Auth::user()->role === 'super' || Auth::user()->role === 'admin' || Auth::user()->role === 'manager')
 						<div class="item {{ Route::currentRouteName() === 'areas' || Route::currentRouteName() === 'careers' ? 'active' : '' }}">
 							<i class="dropdown icon"></i>
 							<span class="text container">
@@ -37,7 +37,7 @@
 							<div class="menu">
 								<a class="item {{ Route::currentRouteName() === 'areas' ? 'active' : '' }}" href="{{ route('areas') }}"><i class="th icon"></i>Áreas</a>
 								<a class="item {{ Route::currentRouteName() === 'careers' ? 'active' : '' }}" href="{{ route('careers') }}"><i class="th large icon"></i>Carreras</a>
-								<div class="item"><i class="users icon"></i>Usuarios</div>
+								<a class="item {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}"><i class="users icon"></i>Usuarios</a>
 								<div class="item"><i class="calendar icon"></i>Periodos</div>
 								<div class="item"><i class="hourglass icon"></i>Procesos</div>
 							</div>

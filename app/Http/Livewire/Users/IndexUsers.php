@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Livewire\Careers;
+namespace App\Http\Livewire\Users;
 
-use App\Models\Career;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexCareers extends Component {
+class IndexUsers extends Component {
 
   use WithPagination;
 
-  private $careers;
+  private $users;
   public $search;
 
   protected $paginationTheme = 'fomantic';
   protected $listeners = ['refresh' => '$refresh'];
-  
+
   public function render() {
-    if ($this->careers && $this->careers->count() === 0) {
+    if ($this->users && $this->users->count() === 0) {
       $this->resetPage();
     }
 
-    $query = Career::query();
+    $query = User::query();
 
     if ($this->search) {
-      $query->where('name', 'like', "%$this->search%")->orderBy('area_id');
+      $query->where('first_name', 'like', "%$this->search%")->orderBy('first_name');
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'No se encontraron coincidencias con la búsqueda.');
@@ -32,7 +32,7 @@ class IndexCareers extends Component {
         $this->emit('dismiss');
       }
     } elseif (empty($this->search)) {
-      $query->orderBy('area_id');
+      $query->orderBy('first_name');
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'Todavía no hay ningún área registrada.');
@@ -41,14 +41,14 @@ class IndexCareers extends Component {
       }
     }
 
-    $this->careers = $query->paginate(6);
+    $this->users = $query->paginate(10);
 
-    if ($this->careers->currentPage() > $this->careers->lastPage()) {
+    if ($this->users->currentPage() > $this->users->lastPage()) {
       $this->resetPage();
       $this->render();
     }
 
-    return view('livewire.careers.index-careers', ['careers' => $this->careers]);
+    return view('livewire.users.index-users', ['users' => $this->users]);
   }
 
   public function handleSearch() {
