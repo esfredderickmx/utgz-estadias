@@ -11,7 +11,6 @@ class IndexAreas extends Component {
   use WithPagination;
 
   private $areas;
-  private $modals;
   public $search;
 
   protected $paginationTheme = 'simple-fomantic';
@@ -49,7 +48,7 @@ class IndexAreas extends Component {
       $this->render();
     }
 
-    return view('livewire.areas.index-areas', ['areas' => $this->areas, 'modals' => $this->modals]);
+    return view('livewire.areas.index-areas', ['areas' => $this->areas]);
   }
 
   public function handleSearch() {
