@@ -1,4 +1,4 @@
-<div class="ui tiny test modal" id="create-area-modal" modal-status="uninitialized" wire:ignore.self>
+<div class="ui tiny modal" id="create-area-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Añadir un área nueva</div>
 	<div class="content">
 		<form class="ui form" id="create-area-form" wire:submit.prevent="storeArea" wire:reset="resetForm" wire:loading.class="loading">

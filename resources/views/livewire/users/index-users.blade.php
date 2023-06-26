@@ -47,7 +47,7 @@
 							<td class="center aligned">{{ $user->first_name ? strtok($user->first_name, ' ') . ' ' . strtok($user->last_name, ' ') : 'Pendiente' }}</td>
 							<td class="center aligned">{{ $user->email }}</td>
 							<td class="center aligned">{{ $user->phone }}</td>
-							<td class="center aligned {{ !$user->type ? '' : ($user->type === 'ordinal' ? 'positive' : ($user->type === 'repeater' ? 'warning' : 'negative')) }}"><i class="{{ !$user->type ? 'ban' : ($user->type === 'ordinal' ? 'check' : ($user->type === 'repeater' ? 'exclamation' : 'times')) }} icon"></i> {{ !$user->type ? 'No aplica' : ($user->type === 'ordinal' ? 'Ordinario' : ($user->type === 'repeater' ? 'Repitiendo' : 'Desaprovechado')) }}</i></td>
+							<td class="center aligned {{ !$user->type ? '' : ($user->type === 'ordinal' ? 'positive' : ($user->type === 'repeater' ? 'warning' : 'negative')) }}"><i class="{{ !$user->type ? 'ban' : ($user->type === 'ordinal' ? 'check' : ($user->type === 'repeater' ? 'exclamation' : 'times')) }} icon"></i> {{ !$user->type ? 'No aplica' : ($user->type === 'ordinal' ? 'Ordinario' : ($user->type === 'repeater' ? 'Repetidor' : 'Desaprovechado')) }}</i></td>
 							<td class="collapsing">
 								<div class="ui teal icon button" target-modal="edit-user-{{ $user->id }}-modal"><i class="pen icon"></i></div>
 								<div class="ui red icon button" target-modal="delete-user-{{ $user->id }}-modal"><i class="trash icon"></i></div>
