@@ -1,4 +1,4 @@
-<div class="ui tiny test modal" id="create-career-modal" modal-status="uninitialized" wire:ignore.self>
+<div class="ui tiny modal" id="create-career-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Añadir un área nueva</div>
 	<div class="content">
 		<form class="ui form" id="create-career-form" wire:submit.prevent="storeCareer" wire:reset="resetForm" wire:loading.class="loading">
@@ -56,6 +56,6 @@
 	</div>
 	<div class="actions">
 		<button class="ui cancel grey button" form="create-career-form" type="reset">Cancelar</button>
-		<button class="ui teal right labeled icon button" form="create-career-form" type="submit" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="storeArea">Crear registro<i class="check icon"></i></button>
+		<button class="ui teal right labeled icon button" form="create-career-form" type="submit" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="storeCareer">Crear registro<i class="check icon"></i></button>
 	</div>
 </div>

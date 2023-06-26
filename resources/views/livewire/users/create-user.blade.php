@@ -1,27 +1,27 @@
-<div class="ui tiny test modal" id="create-user-modal" modal-status="uninitialized" wire:ignore.self>
+<div class="ui tiny modal" id="create-user-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Añadir un usuario nuevo</div>
-	<div class="content">
+	<div class="scrolling content">
 		<form class="ui form" id="create-user-form" wire:submit.prevent="storeUser" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<div class="two fields">
 				<div class="field required {{ $errors->has('first_name') ? 'error' : '' }}">
 					<label>Nombre(s)</label>
 					<div class="ui left icon input">
-						<input id="first_name" name="first_name" type="text" wire:model.lazy="first_name" autocomplete="off" placeholder="Nombre(s)">
+						<input id="first_name" name="first_name" type="text" wire:model="first_name" autocomplete="off" placeholder="Nombre(s)">
 						<i class="quote left icon"></i>
 					</div>
 				</div>
 				<div class="field required {{ $errors->has('last_name') ? 'error' : '' }}">
 					<label>Apellido(s)</label>
 					<div class="ui left icon input">
-						<input id="last_name" name="last_name" type="text" wire:model.lazy="last_name" autocomplete="off" placeholder="Apellido(s)">
+						<input id="last_name" name="last_name" type="text" wire:model="last_name" autocomplete="off" placeholder="Apellido(s)">
 						<i class="quote right icon"></i>
 					</div>
 				</div>
 			</div>
 			<div class="field required {{ $errors->has('role') ? 'error' : '' }}">
 				<label>Rol</label>
-				<select class="ui selection dropdown" id="role" name="role" wire:model.lazy="role">
+				<select class="ui selection dropdown" id="role" name="role" wire:model="role">
 					<option value="">Seleccionar rol</option>
 					<option value="admin">Administrativo</option>
 					<option value="manager">Jefe de área</option>
@@ -30,27 +30,27 @@
 				</select>
 			</div>
 			<div class="two fields">
-				<div class="field required {{ $errors->has('control_number') ? 'error' : '' }}">
+				<div class="field required {{ $errors->has('code') ? 'error' : '' }}">
 					<label>Número de {{ !$role || $role === 'student' ? 'control' : 'personal' }}</label>
 					<div class="ui left icon input">
-						<input id="control_number" name="control_number" type="text" wire:model.lazy="control_number" autocomplete="off" placeholder="Número de {{ !$role || $role === 'student' ? 'control' : 'personal' }}">
+						<input id="code" name="code" type="text" wire:model="code" autocomplete="off" placeholder="Número de {{ !$role || $role === 'student' ? 'control' : 'personal' }}">
 						<i class="id card alternate icon"></i>
 					</div>
 				</div>
 				<div class="field required {{ $errors->has('phone') ? 'error' : '' }}">
 					<label>Teléfono personal</label>
 					<div class="ui left icon input">
-						<input id="phone" name="phone" type="text" maxlength="10" wire:model.lazy="phone" autocomplete="off" placeholder="Teléfono personal">
+						<input id="phone" name="phone" type="text" maxlength="10" wire:model="phone" autocomplete="off" placeholder="Teléfono personal">
 						<i class="phone alternate icon"></i>
 					</div>
 				</div>
 			</div>
 			@if ($role)
 				<div class="fields">
-					<div class="{{ $role !== 'student' ? 'sixteen' : 'ten' }} wide field required {{ $errors->has(!$role || $role === 'student' ? 'control_number' : 'valid_email') ? 'error' : '' }}">
+					<div class="{{ $role !== 'student' ? 'sixteen' : 'ten' }} wide field required {{ $errors->has(!$role || $role === 'student' ? 'code' : 'valid_email') ? 'error' : '' }}">
 						<label>Correo institucional</label>
 						<div class="ui right labeled left icon input">
-							<input id="email" name="email" type="text" wire:model.lazy="{{ !$role || $role === 'student' ? 'control_number' : 'email' }}" autocomplete="off" {{$role === 'student' ? 'readonly' : ''}} placeholder="Correo institucional">
+							<input id="email" name="email" type="text" wire:model="{{ !$role || $role === 'student' ? 'code' : 'email' }}" autocomplete="off" {{ $role === 'student' ? 'readonly' : '' }} placeholder="Correo institucional">
 							<div class="ui basic label">@utgz.edu.mx</div>
 							<i class="envelope icon"></i>
 						</div>
@@ -58,7 +58,7 @@
 					@if ($role === 'student')
 						<div class="six wide field required {{ $errors->has('type') ? 'error' : '' }}">
 							<label>Estado</label>
-							<select class="ui selection dropdown" id="type" name="type" wire:model.lazy="type">
+							<select class="ui selection dropdown" id="type" name="type" wire:model="type">
 								<option value="">Seleccionar estado</option>
 								<option value="ordinal">Ordinario</option>
 								<option value="repeater">Repitiendo</option>
@@ -71,7 +71,7 @@
 			@if ($role === 'adviser' || $role === 'manager')
 				<div class="field required {{ $errors->has('area_id') ? 'error' : '' }}">
 					<label>Área</label>
-					<select class="ui search selection dropdown" id="area_id" name="area_id" wire:model.lazy="area_id">
+					<select class="ui search selection dropdown" id="area_id" name="area_id" wire:model="area_id">
 						<option value="">Seleccionar área</option>
 						@foreach ($areas as $area)
 							<option value="{{ $area->id }}">{{ $area->name }}</option>
@@ -82,7 +82,7 @@
 			@if ($role === 'student')
 				<div class="field required {{ $errors->has('career_id') ? 'error' : '' }}">
 					<label>Carrera</label>
-					<select class="ui search selection dropdown" id="career_id" name="career_id" wire:model.lazy="career_id">
+					<select class="ui search selection dropdown" id="career_id" name="career_id" wire:model="career_id">
 						<option value="">Seleccionar carrera</option>
 						@foreach ($careers as $career)
 							<option value="{{ $career->id }}">{{ $career->name }} {{ $career->context ?? '' }}</option>

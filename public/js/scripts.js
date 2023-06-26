@@ -1,82 +1,88 @@
-$('.ui.dropdown').dropdown({
-  ignoreDiacritics: true,
-  sortSelect: true,
-  fullTextSearch:'exact',
-  message: {
-    addResult: 'Añadir <b>{term}</b>',
-    count: '{count} seleccionado(s)',
-    maxSelections: '{maxCount} selecciones máx',
-    noResults: 'Sin resultados'
-  }
-});
+$(document).ready(function () {
+  $('.ui.checkbox').checkbox();
 
-$('.ui.checkbox').checkbox();
-
-$('.pop').popup()
-
-$('#navbar-segment').visibility({
-  once: false,
-  onBottomPassedReverse: function () {
-    $('#floating-navbar').transition();
-    $('.ui.sticky').sticky({
-      offset: 0.1
-    });
-  },
-  onBottomPassed: function () {
-    $('#floating-navbar').transition();
-    $('.ui.sticky').sticky({
-      context: '#content'
-    });
-  }
-});
-
-$(":not([modal-status])").modal({
-  detachable: true,
-  closable: false,
-  inverted: true,
-  transition: 'fade up',
-  allowMultiple: false,
-  onShow: function () {
-    $('.ui.dimmer').addClass('inverted');
-    $('.pop').popup('hide')
-  }
-});
-
-$("[modal-status='uninitialized']").modal({
-  detachable: false,
-  centered: false,
-  closable: false,
-  inverted: true,
-  transition: 'fade up',
-  allowMultiple: false,
-  onShow: function () {
-    $(this).attr('modal-status', 'initialized')
-    $('.ui.dimmer').addClass('inverted');
-    $('.pop').popup('hide')
-  }
-});
-
-$('[target-modal]').each(function () {
-  $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
-});
-
-$('.toggle.password').state({
-  text: {
-    inactive: '<i class="eye slash icon"></i>',
-    active: '<i class="eye icon"></i>'
-  },
-  className: {
-    active: 'teal'
-  },
-  onChange: function () {
-    var passwordField = $(this).closest('.field').find('input');
-
-    if (passwordField.attr('type') === 'password') {
-      passwordField.attr('type', 'text').focus();
-    } else {
-      passwordField.attr('type', 'password').focus();
+  $('.ui.dropdown').dropdown();
+  $('.ui.selection.dropdown').dropdown({
+    ignoreDiacritics: true,
+    sortSelect: true,
+    fullTextSearch: 'exact',
+    message: {
+      addResult: 'Añadir <b>{term}</b>',
+      count: '{count} seleccionado(s)',
+      maxSelections: '{maxCount} selecciones máx',
+      noResults: 'Sin resultados'
     }
-  }
+  });
+
+  $('#navbar-segment').visibility({
+    once: false,
+    onBottomPassedReverse: function () {
+      $('#floating-navbar').transition();
+      $('.ui.sticky').sticky({
+        offset: 0.1
+      });
+    },
+    onBottomPassed: function () {
+      $('#floating-navbar').transition();
+      $('.ui.sticky').sticky({
+        context: '#content'
+      });
+    }
+  });
+
+  $(":not([modal-status])").modal({
+    detachable: true,
+    closable: false,
+    inverted: true,
+    transition: 'fade up',
+    allowMultiple: false,
+    onShow: function () {
+      $('.ui.dimmer').addClass('inverted');
+      $('.pop').popup('hide')
+    }
+  });
+
+  $("[modal-status='uninitialized']").modal({
+    detachable: false,
+    centered: false,
+    closable: false,
+    inverted: true,
+    transition: 'fade up',
+    allowMultiple: false,
+    onShow: function () {
+      $(this).attr('modal-status', 'initialized')
+      $('.ui.dimmer').addClass('inverted');
+      $('.pop').popup('hide')
+    }
+  });
+
+  $('[target-modal]').each(function () {
+    $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
+  });
+
+  /* $('.ui.selection.dropdown').popup({
+    content: 'Seleccione dando clic o tocando alguna opción (use su teclado solo para buscar o desplazarse)',
+    position: 'top center'
+  }); */
+
+  $('.toggle.password').state({
+    text: {
+      inactive: '<i class="eye slash icon"></i>',
+      active: '<i class="eye icon"></i>'
+    },
+    className: {
+      active: 'teal'
+    },
+    onChange: function () {
+      var passwordField = $(this).closest('.field').find('input');
+
+      if (passwordField.attr('type') === 'password') {
+        passwordField.attr('type', 'text').focus();
+      } else {
+        passwordField.attr('type', 'password').focus();
+      }
+    }
+  });
 });
 
 $(document).ready(function () {
@@ -218,10 +224,12 @@ $(document).on('livewire:update', function () {
 
 $(document).on('livewire:update', function () {
   $('.ui.checkbox').checkbox();
-  $('.ui.dropdown').dropdown({
+
+  $('.ui.dropdown').dropdown();
+  $('.ui.selection.dropdown').dropdown({
     ignoreDiacritics: true,
     sortSelect: true,
-    fullTextSearch:'exact',
+    fullTextSearch: 'exact',
     message: {
       addResult: 'Añadir <b>{term}</b>',
       count: '{count} seleccionado(s)',

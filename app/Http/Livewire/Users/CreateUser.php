@@ -18,7 +18,7 @@ class CreateUser extends Component {
   public $last_name;
   public $email;
   public $valid_email;
-  public $control_number;
+  public $code;
   public $phone;
   public $type;
   public $role;
@@ -28,7 +28,7 @@ class CreateUser extends Component {
       'first_name' => 'required|string',
       'last_name' => 'required|string',
       'role' => 'required|in:admin,manager,adviser,student',
-      'control_number' => 'required|numeric|unique:users,control_number',
+      'code' => 'required|numeric|unique:users,code',
       'phone' => 'required|numeric|min_digits:10|max_digits:10',
       'valid_email' => [
         Rule::excludeIf(!$this->role || $this->role === 'student'),
@@ -60,8 +60,8 @@ class CreateUser extends Component {
   }
 
   public function render() {
-    $this->areas = Area::all();
-    $this->careers = Career::all();
+    $this->areas = Area::query()->orderBy('name')->get();
+    $this->careers = Career::query()->orderBy('name')->get();
 
     return view('livewire.users.create-user', ['areas' => $this->areas, 'careers' => $this->careers]);
   }
@@ -72,12 +72,14 @@ class CreateUser extends Component {
 
   public function updatedRole() {
     $this->reset('email', 'valid_email', 'type', 'area_id', 'career_id');
+    $this->updatedCode();
     $this->validate();
+    $this->updatedEmail();
   }
 
-  public function updatedControlNumber() {
+  public function updatedCode() {
     if ($this->role === 'student') {
-      $this->valid_email = $this->control_number . '@utgz.edu.mx';
+      $this->valid_email = $this->code . '@utgz.edu.mx';
     }
   }
 

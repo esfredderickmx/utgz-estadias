@@ -40,7 +40,7 @@ class Login extends Component {
     if (Auth::attempt(['email' => $validated['username'], 'password' => $validated['password']], $validated['remember'])) {
       $this->resetForm();
 
-      $this->emit('logged-in', 'Sesión iniciada correctamente.');
+      return $this->emit('logged-in', 'Sesión iniciada correctamente.');
     } else {
       return $this->addError('credentials', 'El usuario y/o la contraseña son incorrectos.');
     }

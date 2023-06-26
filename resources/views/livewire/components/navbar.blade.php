@@ -35,8 +35,8 @@
 								<i class="sliders horizontal icon"></i> Control admin.
 							</span>
 							<div class="menu">
-								<a class="item {{ Route::currentRouteName() === 'areas' ? 'active' : '' }}" href="{{ route('areas') }}"><i class="th icon"></i>Áreas</a>
-								<a class="item {{ Route::currentRouteName() === 'careers' ? 'active' : '' }}" href="{{ route('careers') }}"><i class="th large icon"></i>Carreras</a>
+								<a class="item {{ Route::currentRouteName() === 'areas' ? 'active' : '' }}" href="{{ route('areas') }}"><i class="grip horizontal icon"></i>Áreas</a>
+								<a class="item {{ Route::currentRouteName() === 'careers' ? 'active' : '' }}" href="{{ route('careers') }}"><i class="th icon"></i>Carreras</a>
 								<a class="item {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}"><i class="users icon"></i>Usuarios</a>
 								<div class="item"><i class="calendar icon"></i>Periodos</div>
 								<div class="item"><i class="hourglass icon"></i>Procesos</div>

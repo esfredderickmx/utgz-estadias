@@ -28,7 +28,7 @@
 				@forelse ($careers as $career)
 					<div class="card" wire:loading.class="ui loading">
 						<div class="content">
-							<img class="right floated tiny ui image" src="{{ asset('storage/images/careers/' . $career->image) }}">
+							<img class="right floated mini ui image" src="{{ asset('storage/images/careers/' . $career->image) }}">
 							<div class="header">{{ $career->name }}</div>
 							<div class="meta">
 								<a class="ui label">{{ $career->grade === 'higher' ? 'Continuidad' : 'T.S.U.' }}</a>
