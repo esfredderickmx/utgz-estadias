@@ -18,6 +18,7 @@ class CreateArea extends Component {
       'description' => 'required|string'
     ];
   }
+  protected $listeners = ['icon-selection' => 'setIcon'];
 
   public function render() {
     return view('livewire.areas.create-area');
@@ -34,7 +35,12 @@ class CreateArea extends Component {
 
     $this->resetForm();
 
-    return $this->emit('created-entity', 'area', $area->id, 'El área de ' . $area->name . ' ha sido registrada correctamente.');
+    return $this->emit('created-entity', 'area', 'El área de ' . $area->name . ' ha sido registrada correctamente.');
+  }
+
+  public function setIcon($selection) {
+    $this->icon = $selection;
+    $this->validateOnly('icon');
   }
 
   public function resetForm() {

@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  $('.ui.checkbox').checkbox();
+  $('.ui.checkbox').each(function () {
+    $(this).checkbox();
+  });
 
   $('.ui.dropdown').dropdown();
   $('.ui.selection.dropdown').dropdown({
@@ -30,40 +32,37 @@ $(document).ready(function () {
     }
   });
 
-  $(":not([modal-status])").modal({
-    detachable: true,
-    closable: false,
-    inverted: true,
-    transition: 'fade up',
-    allowMultiple: false,
-    onShow: function () {
-      $('.ui.dimmer').addClass('inverted');
-      $('.pop').popup('hide')
-    }
-  });
+  /*   $(":not([modal-status])").modal({
+      detachable: true,
+      closable: false,
+      inverted: true,
+      transition: 'fade up',
+      allowMultiple: false,
+      onShow: function () {
+        $('.ui.dimmer').addClass('inverted');
+        $('.pop').popup('hide')
+      }
+    }); */
 
-  $("[modal-status='uninitialized']").modal({
-    detachable: false,
-    centered: false,
-    closable: false,
-    inverted: true,
-    transition: 'fade up',
-    allowMultiple: false,
-    onShow: function () {
-      $(this).attr('modal-status', 'initialized')
-      $('.ui.dimmer').addClass('inverted');
-      $('.pop').popup('hide')
-    }
+  $("[modal-status='uninitialized']").each(function () {
+    $(this).modal({
+      detachable: false,
+      centered: false,
+      closable: false,
+      inverted: true,
+      transition: 'fade up',
+      allowMultiple: false,
+      onShow: function () {
+        $(this).attr('modal-status', 'initialized')
+        $('.ui.dimmer').addClass('inverted');
+        $('.pop').popup('hide')
+      }
+    });
   });
 
   $('[target-modal]').each(function () {
     $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
   });
-
-  /* $('.ui.selection.dropdown').popup({
-    content: 'Seleccione dando clic o tocando alguna opción (use su teclado solo para buscar o desplazarse)',
-    position: 'top center'
-  }); */
 
   $('.toggle.password').state({
     text: {
@@ -152,10 +151,14 @@ $(document).ready(function () {
     }, 500);
   });
 
-  Livewire.on('created-entity', function (entity, id, message) {
+  Livewire.on('created-entity', function (entity, message) {
     $('#create-' + entity + '-modal').modal('hide');
 
     Livewire.emit('refresh');
+
+    if (entity === 'career') {
+      $('#create-' + entity + '-form').find("[type='file']").first().val('')
+    }
 
     setTimeout(function () {
       Livewire.emit('toast', 'success', message);
@@ -167,6 +170,10 @@ $(document).ready(function () {
     modal.modal('hide');
 
     Livewire.emit('refresh');
+
+    if (entity === 'career') {
+      $('#create-' + entity + '-form').find("[type='file']").first().val('')
+    }
 
     setTimeout(function () {
       Livewire.emit('toast', 'success', message);
@@ -186,6 +193,14 @@ $(document).ready(function () {
       editModal.modal('destroy');
       deleteModal.modal('destroy');
     }, 500);
+  });
+
+  Livewire.on('selected-icon', function (type, id) {
+    if (type === 'create') {
+      $('#create-area-modal').modal('show');
+    } else if (type === 'edit') {
+      $('#edit-area-' + id + '-modal').modal('show');
+    }
   });
 });
 
@@ -223,7 +238,9 @@ $(document).on('livewire:update', function () {
 }); */
 
 $(document).on('livewire:update', function () {
-  $('.ui.checkbox').checkbox();
+  $('.ui.checkbox').each(function () {
+    $(this).checkbox();
+  });
 
   $('.ui.dropdown').dropdown();
   $('.ui.selection.dropdown').dropdown({
@@ -238,20 +255,23 @@ $(document).on('livewire:update', function () {
     }
   });
 
-  $("[modal-status='uninitialized']").modal({
-    detachable: false,
-    centered: false,
-    closable: false,
-    inverted: true,
-    transition: 'fade up',
-    allowMultiple: false,
-    onShow: function () {
-      $(this).attr('modal-status', 'initialized');
-      $('.ui.dimmer').addClass('inverted');
-      $('.pop').popup('hide')
-    }
+  $("[modal-status='uninitialized']").each(function () {
+    $(this).modal({
+      detachable: false,
+      centered: false,
+      closable: false,
+      inverted: true,
+      transition: 'fade up',
+      allowMultiple: false,
+      onShow: function () {
+        $(this).attr('modal-status', 'initialized')
+        $('.ui.dimmer').addClass('inverted');
+        $('.pop').popup('hide')
+      }
+    });
   });
   $('.ui.dimmer').addClass('inverted');
+
   $('[target-modal]').each(function () {
     $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
   });
