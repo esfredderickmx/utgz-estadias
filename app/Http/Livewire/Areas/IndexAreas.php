@@ -24,7 +24,7 @@ class IndexAreas extends Component {
     $query = Area::query();
 
     if ($this->search) {
-      $query->where('name', 'like', "%$this->search%")->orderBy('name');
+      $query->where('name', 'like', "%$this->search%");
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'No se encontraron coincidencias con la búsqueda.');
@@ -32,14 +32,14 @@ class IndexAreas extends Component {
         $this->emit('dismiss');
       }
     } elseif (empty($this->search)) {
-      $query->orderBy('name');
-
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'Todavía no hay ningún área registrada.');
       } else {
         $this->emit('dismiss');
       }
     }
+
+    $query->orderBy('name');
 
     $this->areas = $query->paginate(6);
 

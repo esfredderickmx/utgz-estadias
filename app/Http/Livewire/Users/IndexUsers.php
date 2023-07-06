@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Users;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,7 +25,9 @@ class IndexUsers extends Component {
     $query = User::query();
 
     if ($this->search) {
-      $query->where('first_name', 'like', "%$this->search%")->orderBy('first_name');
+      $query->where(function ($subquery) {
+        $subquery->where('first_name', 'like', "%$this->search%")->orWhere('last_name', 'like', "%$this->search%");
+      });
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'No se encontraron coincidencias con la búsqueda.');
@@ -32,8 +35,6 @@ class IndexUsers extends Component {
         $this->emit('dismiss');
       }
     } elseif (empty($this->search)) {
-      $query->orderBy('first_name');
-
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'Todavía no hay ningún área registrada.');
       } else {
@@ -41,6 +42,11 @@ class IndexUsers extends Component {
       }
     }
 
+    if(Auth::user()->role!=='super') {
+      $query->where('role', '!=', 'super');
+    }
+    $query->orderBy('first_name');
+    
     $this->users = $query->paginate(10);
 
     if ($this->users->currentPage() > $this->users->lastPage()) {

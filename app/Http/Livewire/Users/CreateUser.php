@@ -16,8 +16,8 @@ class CreateUser extends Component {
   public $career_id;
   public $first_name;
   public $last_name;
+  public $help_email;
   public $email;
-  public $valid_email;
   public $code;
   public $phone;
   public $type;
@@ -30,8 +30,8 @@ class CreateUser extends Component {
       'role' => 'required|in:admin,manager,adviser,student',
       'code' => 'required|numeric|unique:users,code',
       'phone' => 'required|numeric|min_digits:10|max_digits:10',
-      'valid_email' => [
-        Rule::excludeIf(!$this->role || $this->role === 'student'),
+      'email' => [
+        Rule::excludeIf(!$this->role || $this->role==='student'),
         'required',
         'email:rfc,dns',
         'unique:users,email'
@@ -71,35 +71,62 @@ class CreateUser extends Component {
   }
 
   public function updatedRole() {
-    $this->reset('email', 'valid_email', 'type', 'area_id', 'career_id');
+    $this->reset('help_email', 'email', 'type', 'area_id', 'career_id');
     $this->updatedCode();
-    $this->validate();
-    $this->updatedEmail();
+    $this->validate([
+      'email' => [
+        Rule::excludeIf(!$this->role || $this->role==='student'),
+        'required',
+        'email:rfc,dns',
+        'unique:users,email'
+      ],
+      'type' => [
+        Rule::excludeIf($this->role !== 'student'),
+        'required',
+        'in:ordinal,repeater,burned',
+        'nullable'
+      ],
+      'area_id' => [
+        Rule::excludeIf($this->role !== 'adviser' && $this->role !== 'manager'),
+        'required',
+        'integer',
+        'exists:areas,id',
+        'nullable'
+      ],
+      'career_id' => [
+        Rule::excludeIf($this->role !== 'student'),
+        'required',
+        'integer',
+        'exists:careers,id',
+        'nullable'
+      ]
+    ]);
+    $this->updatedHelpEmail();
   }
 
   public function updatedCode() {
     if ($this->role === 'student') {
-      $this->valid_email = $this->code . '@utgz.edu.mx';
+      $this->email = $this->code . '@utgz.edu.mx';
     }
   }
 
-  public function updatedEmail() {
+  public function updatedHelpEmail() {
     if ($this->role !== 'student') {
-      $this->valid_email = $this->email . '@utgz.edu.mx';
-      $this->validateOnly('valid_email');
+      $this->email = $this->help_email . '@utgz.edu.mx';
+      $this->validateOnly('email');
     }
   }
 
   public function storeUser() {
     $validated = $this->validate();
-    $validated['email'] = $this->valid_email;
+    $validated['email'] = $this->email;
     $validated['password'] = 'UTgz123*';
-
+    
     $user = User::create($validated);
 
     $this->resetForm();
 
-    return $this->emit('created-entity', 'user', $user->id, 'El usuario llamado ' . strtok($user->first_name, ' ') . ' ' . strtok($user->last_name, ' ') . ' ha sido registrado correctamente.');
+    return $this->emit('created-entity', 'user', 'El usuario llamado ' . strtok($user->first_name, ' ') . ' ' . strtok($user->last_name, ' ') . ' ha sido registrado correctamente.');
   }
 
   public function resetForm() {

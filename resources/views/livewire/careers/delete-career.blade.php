@@ -1,7 +1,7 @@
 <div class="ui tiny modal" id="delete-career-{{ $career->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical red inverted segment huge header">Eliminar área</div>
 	<div class="content">
-		<p>¿Está seguro de que desea eliminar la carrera de {{ $career->name }} {{$career->context ?? ''}}? Esta acción no se puede deshacer.</p>
+		<p>¿Está seguro de que desea eliminar los datos de la carrera de {{ $career->name }} {{$career->context ?? ''}}? Esta acción no se puede deshacer.</p>
 		@include('layouts.partials.messages')
 	</div>
 	<form class="actions" id="delete-career-{{ $career->id }}-form" wire:submit.prevent="destroyCareer" wire:reset="resetForm" wire:loading.class="loading">

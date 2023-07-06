@@ -47,10 +47,10 @@
 			</div>
 			@if ($role)
 				<div class="fields">
-					<div class="{{ $role !== 'student' ? 'sixteen' : 'ten' }} wide field required {{ $errors->has(!$role || $role === 'student' ? 'code' : 'valid_email') ? 'error' : '' }}">
+					<div class="{{ $role !== 'student' ? 'sixteen' : 'ten' }} wide field required {{ $errors->has(!$role || $role === 'student' ? 'code' : 'email') ? 'error' : '' }}">
 						<label>Correo institucional</label>
 						<div class="ui right labeled left icon input">
-							<input id="email" name="email" type="text" wire:model="{{ !$role || $role === 'student' ? 'code' : 'email' }}" autocomplete="off" {{ $role === 'student' ? 'readonly' : '' }} placeholder="Correo institucional">
+							<input id="email" name="email" type="text" wire:model="{{ !$role || $role === 'student' ? 'code' : 'help_email' }}" autocomplete="off" {{ $role === 'student' ? 'readonly' : '' }} placeholder="Correo institucional">
 							<div class="ui basic label">@utgz.edu.mx</div>
 							<i class="envelope icon"></i>
 						</div>

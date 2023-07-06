@@ -30,8 +30,7 @@
 						<div class="content">
 							<i class="large right floated {{ $area->icon }} icon"></i>
 							<div class="header">{{ $area->name }}</div>
-							<div class="meta" data-tooltip="@foreach ($area->careers as $career){{ $career->name }}
-                 @endforeach" data-variation="tiny multiline" data-position="bottom left" data-inverted>{{ $area->careers->count() }} carreras asociadas</div>
+							<div class="meta" data-tooltip="@foreach ($area->careers as $career){{ $career->name }} @endforeach" data-variation="tiny multiline" data-position="bottom left" data-inverted>{{ $area->careers->count() }} carreras asociadas</div>
 							<div class="ui justified description container">
 								<p>{{ $area->description }}</p>
 							</div>
@@ -43,22 +42,21 @@
 					</div>
 				@empty
           </div>
-					<div class="ui placeholder segment" wire:loading.class="loading">
-						<div class="ui icon header">
-							<i class="{{ $search ? 'search' : 'exclamation' }} icon"></i>
-							{{ $search ? 'No hubo resultados coincidentes, inténtelo de nuevo.' : 'Aún no hay áreas registradas, intente añadir algunas.' }}
-						</div>
-						@if ($search)
-							<section class="ui center aligned container inline">
-								<div class="ui button" wire:click="clearSearch"><i class="times icon"></i>Limpiar búsqueda</div>
-								<div class="ui teal button" target-modal="create-area-modal">Añadir área</div>
-							</section>
-						@else
-							<div class="ui teal button" target-modal="create-area-modal">
-								<i class="plus icon"></i>Añadir un área
-							</div>
-						@endif
-					</div>
+          <div class="ui placeholder segment" wire:loading.class="loading">
+            <div class="ui icon header">
+              <i class="{{ $search ? 'search' : 'exclamation' }} icon"></i>
+              {{ $search ? 'No hubo resultados coincidentes, inténtelo de nuevo.' : 'Aún no hay áreas registradas, intente añadir algunas.' }}
+            </div>
+            @if ($search)
+              <section class="ui center aligned container inline">
+                <div class="ui button" wire:click="clearSearch"><i class="times icon"></i>Limpiar búsqueda</div>
+                <div class="ui teal button" target-modal="create-area-modal">Añadir área</div>
+              </section>
+            @else
+              <div class="ui teal button" target-modal="create-area-modal">
+                <i class="plus icon"></i>Añadir un área
+              </div>
+            @endif
 				@endforelse
 			</div>
 		</div>

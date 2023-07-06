@@ -14,7 +14,7 @@ class EditUser extends Component {
   private $areas;
   private $careers;
   public User $user;
-  public $email;
+  public $help_email;
   public $initial_state;
 
   protected function rules() {
@@ -54,13 +54,13 @@ class EditUser extends Component {
   }
 
   public function mount() {
-    $this->email = strtok($this->user->email, '@');
+    $this->help_email = strtok($this->user->email, '@');
     $this->initial_state = $this->user->getAttributes();
   }
 
   public function render() {
-    $this->areas = Area::all();
-    $this->careers = Career::all();
+    $this->areas = Area::query()->orderBy('name')->get();
+    $this->careers = Career::query()->orderBy('name')->get();
 
     return view('livewire.users.edit-user', ['areas' => $this->areas, 'careers' => $this->careers]);
   }
@@ -70,10 +70,37 @@ class EditUser extends Component {
   }
 
   public function updatedUserRole() {
-    $this->email = $this->user->email = $this->user->type = $this->user->area_id = $this->user->career_id = null;
+    $this->help_email = $this->user->email = $this->user->type = $this->user->area_id = $this->user->career_id = null;
     $this->updatedUserCode();
-    $this->validate();
-    $this->updatedEmail();
+    $this->validate([
+      'user.email' => [
+        Rule::excludeIf(!$this->user->role || $this->user->role === 'student'),
+        'required',
+        'email:rfc,dns',
+        Rule::unique('users', 'email')->ignore($this->user->id)
+      ],
+      'user.type' => [
+        Rule::excludeIf($this->user->role !== 'student'),
+        'required',
+        'in:ordinal,repeater,burned',
+        'nullable'
+      ],
+      'user.area_id' => [
+        Rule::excludeIf($this->user->role !== 'adviser' && $this->user->role !== 'manager'),
+        'required',
+        'integer',
+        'exists:areas,id',
+        'nullable'
+      ],
+      'user.career_id' => [
+        Rule::excludeIf($this->user->role !== 'student'),
+        'required',
+        'integer',
+        'exists:careers,id',
+        'nullable'
+      ]
+    ]);
+    $this->updatedHelpEmail();
   }
 
   public function updatedUserCode() {
@@ -82,9 +109,9 @@ class EditUser extends Component {
     }
   }
 
-  public function updatedEmail() {
+  public function updatedHelpEmail() {
     if ($this->user->role !== 'student') {
-      $this->user->email = $this->email . '@utgz.edu.mx';
+      $this->user->email = $this->help_email . '@utgz.edu.mx';
       $this->validateOnly('user.email');
     }
   }
@@ -93,7 +120,7 @@ class EditUser extends Component {
     if (Auth::user()->id === $this->user->id) {
       return session()->flash('warning', 'No se puede actualizar la información del usuario autenticado.');
     }
-    
+
     $current_state = $this->user->getAttributes();
     $differences = array_diff_assoc($this->initial_state, $current_state);
 
@@ -107,11 +134,14 @@ class EditUser extends Component {
 
     $this->initial_state = $this->user->getAttributes();
 
+    $this->resetForm();
+
     return $this->emit('updated-entity', 'user', $this->user->id, 'La información del usuario llamado ' . strtok($this->user->first_name, ' ') . ' ' . strtok($this->user->last_name, ' ') . ' ha sido actualizada correctamente.');
   }
 
   public function resetForm() {
     $this->user->fill($this->initial_state);
+    $this->help_email = strtok($this->user->email, '@');
     $this->resetErrorBag();
   }
 }
