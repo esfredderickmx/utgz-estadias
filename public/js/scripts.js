@@ -16,6 +16,8 @@ $(document).ready(function () {
     }
   });
 
+  $('.ui.calendar').calendar();
+
   $('#navbar-segment').visibility({
     once: false,
     onBottomPassedReverse: function () {
@@ -202,6 +204,20 @@ $(document).ready(function () {
       $('#edit-area-' + id + '-modal').modal('show');
     }
   });
+
+  Livewire.on('form-reset', function (type, entity) {
+    Livewire.on('calendar-reset', function (id, date) {
+      if (type === 'create') {
+        $('#create-' + entity + '-form').find('.ui.calendar').first().calendar('clear');
+      } else {
+        $('#edit-' + entity + '-' + id + '-form').find('.ui.calendar').first().calendar('set date', date);
+      }
+    });
+  });
+
+  Livewire.on('year-search-reset', function () {
+    $('#year_search').closest('.ui.calendar').calendar('clear');
+  });
 });
 
 $(document).ready(function () {
@@ -254,6 +270,8 @@ $(document).on('livewire:update', function () {
       noResults: 'Sin resultados'
     }
   });
+
+  $('.ui.calendar').calendar();
 
   $("[modal-status='uninitialized']").each(function () {
     $(this).modal({

@@ -8,7 +8,7 @@
 			<div class="fields">
 				<div class="six wide field">
 					<div class="ui {{ $search ? 'action' : '' }} left icon input">
-						<input id="search" name="search" type="text" wire:model.debounce.300ms="search" autocomplete="off" autofocus placeholder="Realizar búsqueda...">
+						<input id="search" name="search" type="text" wire:model.debounce.300ms="search" autocomplete="off" autofocus placeholder="Buscar por nombre o apellido">
 						<i class="search icon"></i>
 						@if ($search)
 							<div class="ui red icon button" wire:click="clearSearch"><i class="times icon"></i></div>

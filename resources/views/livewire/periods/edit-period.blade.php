@@ -1,37 +1,31 @@
-<div class="ui tiny test modal" id="" modal-status="uninitialized" wire:ignore.self>
-    <div class="ui vertical teal inverted segment huge header">Editar datos del periodo</div>
-    <div class="content">
-        <form class="ui form" id="" wire:submit.prevent="updatePeriod" wire:reset="resetForm"
-            wire:loading.class="loading">
-            @csrf
-            <div class="field required">
-                <label>Inicio</label>
-                <div class="ui left icon input">
-                    <input id="name" name="name" type="text" wire:model="name" autocomplete="off"
-                        placeholder="Mes en el que inicia">
-                    <i class="quote left icon"></i>
-                </div>
-            </div>
-            <div class="field required">
-                <label>Fin</label>
-                <div class="ui left icon input">
-                    <input id="context" name="context" type="text" wire:model="context" autocomplete="off"
-                        placeholder="Mes en el que finaliza">
-                    <i class="quote right icon"></i>
-                </div>
-            </div>
-            <div class="field required">
-                <label>Año</label>
-                <div class="ui left icon input">
-                    <input id="context" name="context" type="text" wire:model="" autocomplete="off" placeholder="Año">
-                </div>
-            </div>
-        </form>
-        @include('layouts.partials.messages')
-    </div>
-    <div class="actions">
-        <button class="ui cancel grey button" form="" type="reset">Cancelar</button>
-        <button class="ui teal right labeled icon button" form="" type="submit" wire:loading.class="loading"
-            wire:loading.attr="disabled" wire:target="updatePeriod">Guardar cambios<i class="save icon"></i></button>
-    </div>
+<div class="ui tiny modal" id="edit-period-{{ $period->id }}-modal" modal-status="uninitialized" wire:ignore.self>
+	<div class="ui vertical teal inverted segment huge header">Editar información del periodo</div>
+	<div class="content">
+		<form class="ui form" id="edit-period-{{ $period->id }}-form" wire:submit.prevent="updatePeriod" wire:reset="resetForm" wire:loading.class="loading">
+			@csrf
+			<div class="field required {{ $errors->has('period.quarter') ? 'error' : '' }}">
+				<label>Cuatrimestre</label>
+				<select class="ui selection dropdown" id="quarter" name="quarter" wire:model="period.quarter">
+					<option value="">Seleccionar cuatrimestre</option>
+					<option value="first">Enero - Abril</option>
+					<option value="second">Mayo - Agosto</option>
+					<option value="third">Septiembre - Diciembre</option>
+				</select>
+			</div>
+			<div class="field required {{ $errors->has('period.year') ? 'error' : '' }}">
+				<label>Año</label>
+				<div class="ui calendar" data-type="year">
+					<div class="ui input left icon">
+						<i class="calendar icon"></i>
+						<input id="year" name="year" type="number" wire:model.lazy="period.year" autocomplete="off" placeholder="Seleccionar año">
+					</div>
+				</div>
+			</div>
+		</form>
+		@include('layouts.partials.messages')
+	</div>
+	<div class="actions">
+		<button class="ui cancel grey button" form="edit-period-{{ $period->id }}-form" type="reset">Cancelar</button>
+		<button class="ui teal right labeled icon button" form="edit-period-{{ $period->id }}-form" type="submit" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="updatePeriod">Guardar cambios<i class="save icon"></i></button>
+	</div>
 </div>

@@ -1,20 +1,20 @@
 <div class="ui small modal" id="select-icon-{{ $entity_type === 'create' ? 'create' : $entity_id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Seleccionar icono</div>
 	<div class="scrolling content">
-		<form class="ui form" id="select-icon-{{ $entity_type === 'create' ? 'create' : $entity_id }}-form" wire:submit.prevent="selectIcon" wire:reset="resetForm">
+		<form class="ui form" id="select-icon-{{ $entity_type === 'create' ? 'create' : $entity_id }}-form" wire:submit.prevent="selectIcon" wire:reset="clearSearch">
 			<div class="two fields">
 				<div class="field">
 					<div class="ui {{ $icon_search ? 'action' : '' }} left icon input">
-						<input id="icon_search" name="icon_search" type="text" wire:model.debounce.300ms="icon_search" autocomplete="off" placeholder="Buscar...">
+						<input id="icon_search" name="icon_search" type="text" wire:model.debounce.300ms="icon_search" autocomplete="off" placeholder="Buscar por identificador">
 						<i class="search icon"></i>
 						@if ($icon_search)
-							<div class="ui red icon button" wire:click="clearSearch"><i class="times icon"></i></div>
+							<div class="ui red icon button" wire:click="clearIconSearch"><i class="times icon"></i></div>
 						@endif
 					</div>
 				</div>
 				<div class="field">
 					<select class="ui two column clearable search selection dropdown" id="category_search" name="category_search" wire:model.lazy="category_search">
-						<option value="">Todos los iconos</option>
+						<option value="">Buscar por categoría</option>
 						@foreach ($categories as $category)
 							<option class="item" value="{{ $category->value }}">{{ $category->name }}</option>
 						@endforeach
@@ -41,15 +41,12 @@
 						</div>
 					</label>
 				@empty
-			</div>
-			<div class="ui placeholder segment" wire:loading.class="loading">
-				<div class="ui icon header">
-					<i class="search icon"></i>No hubo resultados coincidentes, inténtelo de nuevo.
-				</div>
-				<section class="ui center aligned container inline">
-					<div class="ui button" wire:click="clearSearch"><i class="times icon"></i>Limpiar búsqueda</div>
-					<div class="ui teal button" wire:click="resetForm">Limpiar filtros</div>
-				</section>
+          </div>
+          <div class="ui placeholder segment" wire:loading.class="loading">
+            <div class="ui icon header">
+              <i class="search icon"></i>No hubo resultados coincidentes, inténtelo de nuevo.
+            </div>
+            <div class="ui button" wire:click="clearSearch"><i class="times icon"></i>Limpiar búsqueda</div>
 				@endforelse
 			</div>
 		</div>
