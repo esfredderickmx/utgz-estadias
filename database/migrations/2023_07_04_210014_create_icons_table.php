@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('name');
         });
 
-        Schema::create('icon_category', function (Blueprint $table) {
+        Schema::create('category_icon', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('icon_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('icon_id');
 
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('icon_id')->references('id')->on('icons')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('category_id')->references('id')->on('icon_categories')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

@@ -55,7 +55,7 @@ class IconSelector extends Component {
       $this->render();
     }
 
-    return view('livewire.components.icon-selector', ['categories' => $this->categories, 'icons' => $this->icons /* 'data' => $json_data */]);
+    return view('livewire.components.icon-selector', ['categories' => $this->categories, 'icons' => $this->icons]);
   }
 
   public function updated($propertyName) {
@@ -72,18 +72,18 @@ class IconSelector extends Component {
     $this->emitUp('icon-selection', $this->selection);
     $this->emit('selected-icon', $this->entity_type, $this->entity_id ?? null);
 
-    return $this->resetForm();
+    return $this->clearSearch();
   }
 
   public function handleSearch() {
     $this->resetPage('iconsPage');
   }
 
-  public function clearSearch() {
+  public function clearIconSearch() {
     $this->reset('icon_search');
   }
 
-  public function resetForm() {
+  public function clearSearch() {
     $this->resetPage('iconsPage');
     $this->reset('icon_search', 'category_search', 'selection');
     $this->resetErrorBag();

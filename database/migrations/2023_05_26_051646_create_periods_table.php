@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
-            $table->enum('start', ['january', 'may', 'september']);
-            $table->enum('end', ['april', 'august', 'december']);
+            $table->enum('quarter', ['first', 'second', 'third']);
             $table->year('year');
             $table->timestamps();
         });

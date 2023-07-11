@@ -8,7 +8,7 @@
 			<div class="fields">
 				<div class="six wide field">
 					<div class="ui {{ $search ? 'action' : '' }} left icon input">
-						<input id="search" name="search" type="text" wire:model.debounce.300ms="search" autocomplete="off" autofocus placeholder="Realizar búsqueda...">
+						<input id="search" name="search" type="text" wire:model.debounce.300ms="search" autocomplete="off" autofocus placeholder="Buscar por nombre">
 						<i class="search icon"></i>
 						@if ($search)
 							<div class="ui red icon button" wire:click="clearSearch"><i class="times icon"></i></div>
@@ -30,7 +30,8 @@
 						<div class="content">
 							<i class="large right floated {{ $area->icon }} icon"></i>
 							<div class="header">{{ $area->name }}</div>
-							<div class="meta" data-tooltip="@foreach ($area->careers as $career){{ $career->name }} @endforeach" data-variation="tiny multiline" data-position="bottom left" data-inverted>{{ $area->careers->count() }} carreras asociadas</div>
+							<div class="meta" data-tooltip="@foreach ($area->careers as $career){{ $career->name }} {{ $career->context ?? '' }}
+                 @endforeach" data-variation="tiny multiline" data-position="bottom left" data-inverted>{{ $area->careers->count() }} carreras asociadas</div>
 							<div class="ui justified description container">
 								<p>{{ $area->description }}</p>
 							</div>
