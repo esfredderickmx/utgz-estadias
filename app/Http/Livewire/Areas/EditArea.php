@@ -12,9 +12,9 @@ class EditArea extends Component {
 
   protected function rules() {
     return [
-      'area.icon' => 'required|string|unique:areas,icon,' . $this->area->id,
-      'area.name' => 'required|string|unique:areas,name,' . $this->area->id,
-      'area.description' => 'required|string'
+      'area.icon' => 'required|string|max:50|unique:areas,icon,' . $this->area->id,
+      'area.name' => 'required|string|max:50|unique:areas,name,' . $this->area->id,
+      'area.description' => 'required|string|max:400'
     ];
   }
   protected $listeners = ['icon-selection' => 'setIcon'];

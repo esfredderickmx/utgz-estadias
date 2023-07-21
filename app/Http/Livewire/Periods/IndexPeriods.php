@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Periods;
 
 use App\Models\Period;
-use App\Models\Periods;
 
 use Livewire\Component;
 use Livewire\WithPagination;

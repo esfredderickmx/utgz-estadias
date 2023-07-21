@@ -70,6 +70,6 @@ class User extends Authenticatable
     }
 
     public function processes(): BelongsToMany {
-      return $this->belongsToMany(Process::class)->withPivot('attempt')->withTimestamps();
+      return $this->belongsToMany(Process::class)->withTimestamps();
     }
 }

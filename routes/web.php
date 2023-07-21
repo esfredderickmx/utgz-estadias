@@ -4,8 +4,10 @@ use App\Http\Livewire\Areas\IndexAreas;
 use App\Http\Livewire\Authentication\Login;
 use App\Http\Livewire\Authentication\Password\Reset;
 use App\Http\Livewire\Careers\IndexCareers;
+use App\Http\Livewire\Companies\IndexCompanies;
 use App\Http\Livewire\Users\IndexUsers;
 use App\Http\Livewire\Periods\IndexPeriods;
+use App\Http\Livewire\Processes\IndexProcesses;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +37,8 @@ Route::get('/careers', IndexCareers::class)->name('careers')->middleware(['auth'
 
 Route::get('/users', IndexUsers::class)->name('users')->middleware(['auth', 'role:super,admin,manager']);
 
+Route::get('/companies', IndexCompanies::class)->name('companies')->middleware(['auth', 'role:super,admin,manager']);
+
 Route::get('/periods', IndexPeriods::class)->name('periods')->middleware(['auth', 'role:super,admin,manager']);
 
-
-
+Route::get('/processes', IndexProcesses::class)->name('processes')->middleware(['auth', 'role:super,admin,manager']);

@@ -23,12 +23,12 @@ class EditCareer extends Component {
   protected function rules() {
     return [
       'career.area_id' => 'required|integer|exists:areas,id',
-      'career.name' => 'required|string',
+      'career.name' => 'required|string|max:50',
       'career.context' => [
         Rule::excludeIf(!$this->has_context),
         'required',
         'string',
-        'nullable'
+        'max:50'
       ],
       'has_context' => 'boolean',
       'career.grade' => 'required|in:technician,higher',
@@ -38,11 +38,12 @@ class EditCareer extends Component {
         Rule::excludeIf(!$this->has_image),
         'required',
         'image',
-        'max:1024'
+        'max:128'
       ],
       'career.image' => [
         Rule::excludeIf(!$this->has_image || !$this->image_valid),
         'required',
+        'string',
         'unique:careers,image'
       ]
     ];

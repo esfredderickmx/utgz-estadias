@@ -14,7 +14,10 @@ class Process extends Model
 
     protected $fillable = [
       'period_id',
-      'kind',
+      'company_id',
+      'grade',
+      'attempt',
+      'type',
       'status'
     ];
 
@@ -22,11 +25,23 @@ class Process extends Model
       return $this->belongsTo(Period::class);
     }
 
+    public function company(): BelongsTo {
+      return $this->belongsTo(Company::class);
+    }
+
     public function reviews(): HasMany {
       return $this->hasMany(Review::class);
     }
 
     public function users(): BelongsToMany {
-      return $this->belongsToMany(User::class)->withPivot('attempt')->withTimestamps();
+      return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function student() {
+      return $this->belongsToMany(User::class)->where('role', 'student')->limit(1);
+    }
+
+    public function adviser() {
+      return $this->belongsToMany(User::class)->where('role', 'adviser')->limit(1);
     }
 }

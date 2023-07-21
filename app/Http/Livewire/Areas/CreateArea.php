@@ -13,9 +13,9 @@ class CreateArea extends Component {
 
   protected function rules() {
     return [
-      'icon' => 'required|string|unique:areas,icon',
-      'name' => 'required|string|unique:areas,name',
-      'description' => 'required|string'
+      'icon' => 'required|string|max:50|unique:areas,icon',
+      'name' => 'required|string|max:50|unique:areas,name',
+      'description' => 'required|string|max:400'
     ];
   }
   protected $listeners = ['icon-selection' => 'setIcon'];

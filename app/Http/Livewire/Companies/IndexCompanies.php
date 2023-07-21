@@ -1,33 +1,30 @@
 <?php
 
-namespace App\Http\Livewire\Users;
+namespace App\Http\Livewire\Companies;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Company;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexUsers extends Component {
+class IndexCompanies extends Component {
 
   use WithPagination;
 
-  private $users;
+  private $companies;
   public $search;
 
   protected $paginationTheme = 'fomantic';
   protected $listeners = ['refresh' => '$refresh'];
 
   public function render() {
-    if ($this->users && $this->users->count() === 0) {
+    if ($this->companies && $this->companies->count() === 0) {
       $this->resetPage();
     }
 
-    $query = User::query();
+    $query = Company::query();
 
     if ($this->search) {
-      $query->where(function ($sub_query) {
-        $sub_query->where('first_name', 'like', "%$this->search%")->orWhere('last_name', 'like', "%$this->search%");
-      });
+      $query->where('name', 'like', "%$this->search%");
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'No se encontraron coincidencias con la búsqueda.');
@@ -36,25 +33,22 @@ class IndexUsers extends Component {
       }
     } elseif (empty($this->search)) {
       if ($query->count() === 0) {
-        $this->emit('toast', 'info', 'Todavía no hay ningún usuario registrada.');
+        $this->emit('toast', 'info', 'Todavía no hay ninguna empresa registrada.');
       } else {
         $this->emit('dismiss');
       }
     }
 
-    if(Auth::user()->role!=='super') {
-      $query->where('role', '!=', 'super');
-    }
-    $query->orderBy('first_name');
-    
-    $this->users = $query->paginate(10);
+    $query->orderBy('name');
 
-    if ($this->users->currentPage() > $this->users->lastPage()) {
+    $this->companies = $query->paginate(10);
+
+    if ($this->companies->currentPage() > $this->companies->lastPage()) {
       $this->resetPage();
       $this->render();
     }
 
-    return view('livewire.users.index-users', ['users' => $this->users]);
+    return view('livewire.companies.index-companies', ['companies' => $this->companies]);
   }
 
   public function handleSearch() {

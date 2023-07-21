@@ -38,8 +38,9 @@
 								<a class="item {{ Route::currentRouteName() === 'areas' ? 'active' : '' }}" href="{{ route('areas') }}"><i class="grip horizontal icon"></i>Áreas</a>
 								<a class="item {{ Route::currentRouteName() === 'careers' ? 'active' : '' }}" href="{{ route('careers') }}"><i class="th icon"></i>Carreras</a>
 								<a class="item {{ Route::currentRouteName() === 'users' ? 'active' : '' }}" href="{{ route('users') }}"><i class="users icon"></i>Usuarios</a>
+								<a class="item {{ Route::currentRouteName() === 'companies' ? 'active' : '' }}" href="{{ route('companies') }}"><i class="city icon"></i>Empresas</a>
 								<a class="item {{ Route::currentRouteName() === 'periods' ? 'active' : '' }}" href="{{ route('periods') }}"><i class="calendar alternate icon"></i>Periodos</a>
-								<div class="item"><i class="hourglass icon"></i>Procesos</div>
+								<a class="item {{ Route::currentRouteName() === 'processes' ? 'active' : '' }}" href="{{ route('processes') }}"><i class="ellipsis horizontal icon"></i>Procesos</a>
 							</div>
 						</div>
 					@endif
