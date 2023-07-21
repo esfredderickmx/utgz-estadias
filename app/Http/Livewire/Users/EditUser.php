@@ -19,11 +19,11 @@ class EditUser extends Component {
 
   protected function rules() {
     return [
-      'user.first_name' => 'required|string',
-      'user.last_name' => 'required|string',
+      'user.first_name' => 'required|string|max:75',
+      'user.last_name' => 'required|string|max:75',
       'user.role' => 'required|in:admin,manager,adviser,student',
-      'user.code' => 'required|numeric|unique:users,code,' . $this->user->id,
-      'user.phone' => 'required|numeric|min_digits:10|max_digits:10',
+      'user.code' => 'required|numeric|max_digits:8|unique:users,code,' . $this->user->id,
+      'user.phone' => 'required|numeric|digits:10',
       'user.email' => [
         Rule::excludeIf(!$this->user->role || $this->user->role === 'student'),
         'required',
@@ -33,22 +33,19 @@ class EditUser extends Component {
       'user.type' => [
         Rule::excludeIf($this->user->role !== 'student'),
         'required',
-        'in:ordinal,repeater,burned',
-        'nullable'
+        'in:ordinal,repeater,burned'
       ],
       'user.area_id' => [
         Rule::excludeIf($this->user->role !== 'adviser' && $this->user->role !== 'manager'),
         'required',
         'integer',
-        'exists:areas,id',
-        'nullable'
+        'exists:areas,id'
       ],
       'user.career_id' => [
         Rule::excludeIf($this->user->role !== 'student'),
         'required',
         'integer',
-        'exists:careers,id',
-        'nullable'
+        'exists:careers,id'
       ]
     ];
   }
@@ -82,22 +79,19 @@ class EditUser extends Component {
       'user.type' => [
         Rule::excludeIf($this->user->role !== 'student'),
         'required',
-        'in:ordinal,repeater,burned',
-        'nullable'
+        'in:ordinal,repeater,burned'
       ],
       'user.area_id' => [
         Rule::excludeIf($this->user->role !== 'adviser' && $this->user->role !== 'manager'),
         'required',
         'integer',
-        'exists:areas,id',
-        'nullable'
+        'exists:areas,id'
       ],
       'user.career_id' => [
         Rule::excludeIf($this->user->role !== 'student'),
         'required',
         'integer',
-        'exists:careers,id',
-        'nullable'
+        'exists:careers,id'
       ]
     ]);
     $this->updatedHelpEmail();

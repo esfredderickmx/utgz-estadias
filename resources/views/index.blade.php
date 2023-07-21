@@ -33,12 +33,12 @@
 		<div class="ui container middle aligned equal width stackable divided grid">
 			<div class="center aligned row">
 				<div class="column">
-					<img class="ui small centered circular image" src="{{ asset('img/tics.jpg') }}">
+					<img class="ui tiny centered circular image" src="{{ asset('img/tics.png') }}">
 					<h2>"La estadía me permitió aplicar mis conocimientos en un entorno real y descubrir mi pasión por la programación web."</h2>
 					<p><b>Jesús Isaías</b>, Ingeniería en Desarrollo y Gestión de Software.</p>
 				</div>
 				<div class="column">
-					<img class="ui small centered circular image" src="{{ asset('img/oci.jpg') }}">
+					<img class="ui tiny centered circular image" src="{{ asset('img/oci.png') }}">
 					<h2>"Esta estadía consolidó mi interés en el comercio internacional y me brindó una perspectiva práctica invaluable que complementa mis estudios académicos."</h2>
 					<p><b>Nadir Luna</b>, Ingeniería en Logística Internacional.</p>
 				</div>

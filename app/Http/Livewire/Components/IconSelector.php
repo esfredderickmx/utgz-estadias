@@ -40,8 +40,8 @@ class IconSelector extends Component {
     }
 
     if ($this->category_search) {
-      $query->whereHas('categories', function ($categoryQuery) {
-        $categoryQuery->where('value', 'like', "%$this->category_search%");
+      $query->whereHas('categories', function ($category_query) {
+        $category_query->where('value', 'like', "%$this->category_search%");
       });
     }
 

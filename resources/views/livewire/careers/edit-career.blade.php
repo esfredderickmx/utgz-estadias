@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="edit-career-{{ $career->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Editar información del área</div>
-	<div class="content">
+	<div class="scrolling content">
 		<form class="ui form" id="edit-career-{{ $career->id }}-form" wire:submit.prevent="updateCareer" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<div class="field required {{ $errors->has('career.career.name') ? 'error' : '' }}">

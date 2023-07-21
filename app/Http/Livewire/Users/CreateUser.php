@@ -25,11 +25,11 @@ class CreateUser extends Component {
 
   protected function rules() {
     return [
-      'first_name' => 'required|string',
-      'last_name' => 'required|string',
+      'first_name' => 'required|string|max:75',
+      'last_name' => 'required|string|max:75',
       'role' => 'required|in:admin,manager,adviser,student',
-      'code' => 'required|numeric|unique:users,code',
-      'phone' => 'required|numeric|min_digits:10|max_digits:10',
+      'code' => 'required|numeric|max_digits:8|unique:users,code',
+      'phone' => 'required|numeric|digits:10',
       'email' => [
         Rule::excludeIf(!$this->role || $this->role==='student'),
         'required',
@@ -39,22 +39,19 @@ class CreateUser extends Component {
       'type' => [
         Rule::excludeIf($this->role !== 'student'),
         'required',
-        'in:ordinal,repeater,burned',
-        'nullable'
+        'in:ordinal,repeater,burned'
       ],
       'area_id' => [
         Rule::excludeIf($this->role !== 'adviser' && $this->role !== 'manager'),
         'required',
         'integer',
-        'exists:areas,id',
-        'nullable'
+        'exists:areas,id'
       ],
       'career_id' => [
         Rule::excludeIf($this->role !== 'student'),
         'required',
         'integer',
-        'exists:careers,id',
-        'nullable'
+        'exists:careers,id'
       ]
     ];
   }
@@ -83,22 +80,19 @@ class CreateUser extends Component {
       'type' => [
         Rule::excludeIf($this->role !== 'student'),
         'required',
-        'in:ordinal,repeater,burned',
-        'nullable'
+        'in:ordinal,repeater,burned'
       ],
       'area_id' => [
         Rule::excludeIf($this->role !== 'adviser' && $this->role !== 'manager'),
         'required',
         'integer',
-        'exists:areas,id',
-        'nullable'
+        'exists:areas,id'
       ],
       'career_id' => [
         Rule::excludeIf($this->role !== 'student'),
         'required',
         'integer',
-        'exists:careers,id',
-        'nullable'
+        'exists:careers,id'
       ]
     ]);
     $this->updatedHelpEmail();

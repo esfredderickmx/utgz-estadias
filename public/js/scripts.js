@@ -5,6 +5,7 @@ $(document).ready(function () {
 
   $('.ui.dropdown').dropdown();
   $('.ui.selection.dropdown').dropdown({
+    selectOnKeydown: false,
     ignoreDiacritics: true,
     sortSelect: true,
     fullTextSearch: 'exact',
@@ -55,9 +56,9 @@ $(document).ready(function () {
       transition: 'fade up',
       allowMultiple: false,
       onShow: function () {
-        $(this).attr('modal-status', 'initialized')
+        $(this).attr('modal-status', 'initialized');
         $('.ui.dimmer').addClass('inverted');
-        $('.pop').popup('hide')
+        $('.pop').popup('hide');
       }
     });
   });
@@ -260,6 +261,7 @@ $(document).on('livewire:update', function () {
 
   $('.ui.dropdown').dropdown();
   $('.ui.selection.dropdown').dropdown({
+    selectOnKeydown: false,
     ignoreDiacritics: true,
     sortSelect: true,
     fullTextSearch: 'exact',
@@ -282,9 +284,9 @@ $(document).on('livewire:update', function () {
       transition: 'fade up',
       allowMultiple: false,
       onShow: function () {
-        $(this).attr('modal-status', 'initialized')
+        $(this).attr('modal-status', 'initialized');
         $('.ui.dimmer').addClass('inverted');
-        $('.pop').popup('hide')
+        $('.pop').popup('hide');
       }
     });
   });

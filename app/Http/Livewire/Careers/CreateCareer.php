@@ -25,20 +25,21 @@ class CreateCareer extends Component {
   protected function rules() {
     return [
       'area_id' => 'required|integer|exists:areas,id',
-      'name' => 'required|string',
+      'name' => 'required|string|max:50',
       'has_context' => 'boolean',
       'context' => [
         Rule::excludeIf(!$this->has_context),
         'required',
         'string',
-        'nullable'
+        'max:50'
       ],
       'grade' => 'required|in:technician,higher',
       'availability' => 'required|in:week,weekend,both',
-      'image_valid' => 'required|image|max:1024',
+      'image_valid' => 'required|image|max:128',
       'image' => [
         Rule::excludeIf(!$this->image_valid),
         'required',
+        'string',
         'unique:careers,image'
       ]
     ];

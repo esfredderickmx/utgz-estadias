@@ -30,7 +30,7 @@
 				@forelse ($icons as $icon)
 					<label class="card" for="{{ $entity_type === 'create' ? 'create' : $entity_id }} {{ $icon->name }}" wire:loading.class="ui loading">
 						<div class="content">
-							<div class="center aligned header" data-inverted data-tooltip="{{ $icon->name }}" data-variation="tiny">
+							<div class="center aligned header" data-inverted data-tooltip="{{ $icon->name }}" data-variation="tiny multiline">
 								<i class="big black {{ $icon->name }} icon"></i>
 							</div>
 							<div class="center aligned description">
