@@ -35,17 +35,17 @@ $(document).ready(function () {
     }
   });
 
-  /*   $(":not([modal-status])").modal({
-      detachable: true,
+  $(".ui.modal:not([modal-status])").each(function() {
+    $(this).modal({
       closable: false,
       inverted: true,
       transition: 'fade up',
       allowMultiple: false,
       onShow: function () {
         $('.ui.dimmer').addClass('inverted');
-        $('.pop').popup('hide')
       }
-    }); */
+    });
+  });
 
   $("[modal-status='uninitialized']").each(function () {
     $(this).modal({
@@ -58,7 +58,6 @@ $(document).ready(function () {
       onShow: function () {
         $(this).attr('modal-status', 'initialized');
         $('.ui.dimmer').addClass('inverted');
-        $('.pop').popup('hide');
       }
     });
   });
@@ -67,7 +66,7 @@ $(document).ready(function () {
     $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
   });
 
-  $('.toggle.password').state({
+  $("[type='password']").closest('.field').find('.ui.toggle').state({
     text: {
       inactive: '<i class="eye slash icon"></i>',
       active: '<i class="eye icon"></i>'
@@ -286,7 +285,6 @@ $(document).on('livewire:update', function () {
       onShow: function () {
         $(this).attr('modal-status', 'initialized');
         $('.ui.dimmer').addClass('inverted');
-        $('.pop').popup('hide');
       }
     });
   });

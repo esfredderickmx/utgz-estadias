@@ -42,11 +42,9 @@ class IndexUsers extends Component {
       }
     }
 
-    if(Auth::user()->role!=='super') {
-      $query->where('role', '!=', 'super');
-    }
+    $query->where('role', '!=', 'super');
     $query->orderBy('first_name');
-    
+
     $this->users = $query->paginate(10);
 
     if ($this->users->currentPage() > $this->users->lastPage()) {

@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="edit-user-{{ $user->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Editar información del usuario</div>
-	<div class="scrolling content">
+	<div class="content">
 		<form class="ui form" id="edit-user-{{ $user->id }}-form" wire:submit.prevent="updateUser" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<div class="two fields">

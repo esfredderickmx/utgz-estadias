@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="delete-user-{{ $user->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical red inverted segment huge header">Eliminar usuario</div>
-	<div class="scrolling content">
+	<div class="content">
 		<p>¿Está seguro de que desea eliminar los datos del usuario llamado {{ strtok($user->first_name, ' ') . ' ' . strtok($user->last_name, ' ') }}? Esta acción no se puede deshacer.</p>
 		@include('layouts.partials.messages')
 	</div>

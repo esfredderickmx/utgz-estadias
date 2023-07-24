@@ -1,7 +1,7 @@
 <div>
 	<div class="ui tiny modal" id="edit-area-{{ $area->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 		<div class="ui vertical teal inverted segment huge header">Editar información del área</div>
-		<div class="scrolling content">
+		<div class="content">
 			<form class="ui form" id="edit-area-{{ $area->id }}-form" wire:submit.prevent="updateArea" wire:reset="resetForm" wire:loading.class="loading">
 				@csrf
 				<div class="field required {{ $errors->has('area.icon') ? 'error' : '' }}">

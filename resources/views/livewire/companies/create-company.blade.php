@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="create-company-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Añadir una empresa nueva</div>
-	<div class="scrolling content">
+	<div class="content">
 		<form class="ui form" id="create-company-form" wire:submit.prevent="storeCompany" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
       <div class="field required {{ $errors->has('name') ? 'error' : '' }}">

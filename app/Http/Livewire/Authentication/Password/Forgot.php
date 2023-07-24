@@ -8,10 +8,12 @@ use Livewire\Component;
 class Forgot extends Component {
 
   public $username;
+  public $foreign = false;
 
   protected function rules() {
     return [
-      'username' => 'required'
+      'username' => 'required|string|max:256',
+      'foreign' => 'boolean'
     ];
   }
 
@@ -26,7 +28,7 @@ class Forgot extends Component {
   public function sendRequest() {
     $validated = $this->validate();
 
-    $validated['username'] = $validated['username'] . '@utgz.edu.mx';
+    $validated['username'] = !$this->foreign ? $validated['username'] . '@utgz.edu.mx' : $validated['username'];
 
     $status = Password::sendResetLink([
       'email' => $validated['username']
