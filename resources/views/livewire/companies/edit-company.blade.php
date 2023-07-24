@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="edit-company-{{ $company->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Editar información de la empresa</div>
-	<div class="scrolling content">
+	<div class="content">
 		<form class="ui form" id="edit-company-{{ $company->id }}-form" wire:submit.prevent="updateCompany" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
       <div class="field required {{ $errors->has('company.name') ? 'error' : '' }}">

@@ -10,16 +10,20 @@ class Reset extends Component {
 
   public $token;
   public $username;
+  public $foreign = false;
   public $password;
   public $password_confirmation;
 
   protected function rules() {
     return [
       'token' => 'required',
-      'username' => 'required',
+      'username' => 'required|string|max:256',
+      'foreign' => 'boolean',
       'password' => [
         'required',
+        'string',
         'min:12',
+        'max:25',
         'not_in:' . $this->username,
         function ($attribute, $value, $fail) {
           if (!preg_match('/[a-z]/', $value)) {
@@ -40,6 +44,12 @@ class Reset extends Component {
   public function mount($token, $username) {
     $this->token = $token;
     $this->username = $username;
+    
+    if (strpos($this->username, '@utgz.edu.mx') !== false) {
+        $this->foreign = false;
+    } else {
+        $this->foreign = true;
+    }
   }
 
   public function render() {
@@ -47,7 +57,7 @@ class Reset extends Component {
   }
 
   public function updated($propertyName) {
-    $this->validate();
+    $this->validateOnly($propertyName);
   }
 
   public function showForm() {

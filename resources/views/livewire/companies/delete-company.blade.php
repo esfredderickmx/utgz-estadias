@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="delete-company-{{ $company->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical red inverted segment huge header">Eliminar empresa</div>
-	<div class="scrolling content">
+	<div class="content">
 		<p>¿Está seguro de que desea eliminar los datos de la empresa {{ $company->name }}? Esta acción no se puede deshacer.</p>
 		@include('layouts.partials.messages')
 	</div>

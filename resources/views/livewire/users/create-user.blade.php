@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="create-user-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Añadir un usuario nuevo</div>
-	<div class="scrolling content">
+	<div class="content">
 		<form class="ui form" id="create-user-form" wire:submit.prevent="storeUser" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<div class="two fields">

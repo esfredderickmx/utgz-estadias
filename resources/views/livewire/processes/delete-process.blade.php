@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="delete-process-{{ $process->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical red inverted segment huge header">Eliminar usuario</div>
-	<div class="scrolling content">
+	<div class="content">
 		<p>¿Está seguro de que desea eliminar los datos de este proceso correspondiente a {{ strtok($process->student->first()->first_name, ' ') . ' ' . strtok($process->student->first()->last_name, ' ')}}? Esta acción no se puede deshacer.</p>
 		@include('layouts.partials.messages')
 	</div>
