@@ -27,6 +27,9 @@
 	</main>
 
 	@include('layouts.partials.footer')
+	@auth 
+	@livewire('users.user-profile')
+	@endauth 
 
 	@guest
 		@livewire('authentication.login')

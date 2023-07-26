@@ -60,10 +60,10 @@ $(document).ready(function () {
     $('#' + $(this).attr('target-modal')).modal('attach events', $(this));
   });
 
-  /* $('.ui.selection.dropdown').popup({
+  /*$('.ui.selection.dropdown').popup({
     content: 'Seleccione dando clic o tocando alguna opción (use su teclado solo para buscar o desplazarse)',
     position: 'top center'
-  }); */
+  });*/
 
   $('.toggle.password').state({
     text: {

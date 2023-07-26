@@ -5,6 +5,7 @@ use App\Http\Livewire\Authentication\Login;
 use App\Http\Livewire\Authentication\Password\Reset;
 use App\Http\Livewire\Careers\IndexCareers;
 use App\Http\Livewire\Users\IndexUsers;
+use App\Http\Livewire\Users\UserProfile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,7 @@ Route::get('/areas', IndexAreas::class)->name('areas')->middleware(['auth', 'rol
 Route::get('/careers', IndexCareers::class)->name('careers')->middleware(['auth', 'role:super,admin,manager']);
 
 Route::get('/users', IndexUsers::class)->name('users')->middleware(['auth', 'role:super,admin,manager']);
+
+
+
+
