@@ -24,7 +24,7 @@ class IndexCareers extends Component {
     $query = Career::query();
 
     if ($this->search) {
-      $query->where('name', 'like', "%$this->search%")->orderBy('area_id');
+      $query->where('name', 'like', "%$this->search%")->orWhere('context', 'like', "%$this->search%");
 
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'No se encontraron coincidencias con la búsqueda.');
@@ -32,14 +32,14 @@ class IndexCareers extends Component {
         $this->emit('dismiss');
       }
     } elseif (empty($this->search)) {
-      $query->orderBy('area_id');
-
       if ($query->count() === 0) {
         $this->emit('toast', 'info', 'Todavía no hay ningún área registrada.');
       } else {
         $this->emit('dismiss');
       }
     }
+
+    $query->orderBy('area_id')->orderBy('grade')->orderBy('name');
 
     $this->careers = $query->paginate(6);
 

@@ -1,6 +1,6 @@
 <div class="ui tiny modal" id="edit-user-{{ $user->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Editar información del usuario</div>
-	<div class="scrolling content">
+	<div class="content">
 		<form class="ui form" id="edit-user-{{ $user->id }}-form" wire:submit.prevent="updateUser" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<div class="two fields">
@@ -23,6 +23,9 @@
 				<label>Rol</label>
 				<select class="ui selection dropdown" id="role" name="role" wire:model="user.role">
 					<option value="">Seleccionar rol</option>
+					@if (Auth::user()->role === 'super')
+						<option value="super">Superusuario</option>
+					@endif
 					<option value="admin">Administrativo</option>
 					<option value="manager">Jefe de área</option>
 					<option value="adviser">Asesor</option>
@@ -50,7 +53,7 @@
 					<div class="{{ $user->role !== 'student' ? 'sixteen' : 'ten' }} wide field required {{ $errors->has(!$user->role || $user->role === 'student' ? 'user.code' : 'user.email') ? 'error' : '' }}">
 						<label>Correo institucional</label>
 						<div class="ui right labeled left icon input">
-							<input id="email" name="email" type="text" wire:model="{{ !$user->role || $user->role === 'student' ? 'user.code' : 'email' }}" autocomplete="off" {{ $user->role === 'student' ? 'readonly' : '' }} placeholder="Correo institucional">
+							<input id="email" name="email" type="text" wire:model="{{ !$user->role || $user->role === 'student' ? 'user.code' : 'help_email' }}" autocomplete="off" {{ $user->role === 'student' ? 'readonly' : '' }} placeholder="Correo institucional">
 							<div class="ui basic label">@utgz.edu.mx</div>
 							<i class="envelope icon"></i>
 						</div>

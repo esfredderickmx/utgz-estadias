@@ -1,7 +1,7 @@
 <div class="ui tiny modal" id="delete-area-{{ $area->id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical red inverted segment huge header">Eliminar área</div>
 	<div class="content">
-		<p>¿Está seguro de que desea eliminar el área de {{ $area->name }}? Esta acción no se puede deshacer.</p>
+		<p>¿Está seguro de que desea eliminar los datos del área de {{ $area->name }}? Esta acción no se puede deshacer.</p>
 		@include('layouts.partials.messages')
 	</div>
 	<form class="actions" id="delete-area-{{ $area->id }}-form" wire:submit.prevent="destroyArea" wire:reset="resetForm" wire:loading.class="loading">

@@ -8,14 +8,16 @@ use Livewire\Component;
 class Login extends Component {
 
   public $username;
+  public $foreign = false;
   public $password;
-  public $remember;
+  public $remember = false;
 
   protected function rules() {
     return [
-      'username' => 'required',
-      'password' => 'required',
-      'remember' => ''
+      'username' => 'required|string|max:256',
+      'foreign' => 'boolean',
+      'password' => 'required|string|max:25',
+      'remember' => 'boolean'
     ];
   }
 
@@ -28,14 +30,13 @@ class Login extends Component {
   }
 
   public function showForm() {
-    return redirect()->back()->with('openLoginModal', true);
+    return redirect()->route('home')->with('openLoginModal', true);
   }
 
   public function login() {
     $validated = $this->validate();
 
-    $validated['username'] = $validated['username'] . '@utgz.edu.mx';
-    $validated['remember'] = $this->remember ? true : false;
+    $validated['username'] = !$this->foreign ? $validated['username'] . '@utgz.edu.mx' : $validated['username'];
 
     if (Auth::attempt(['email' => $validated['username'], 'password' => $validated['password']], $validated['remember'])) {
       $this->resetForm();

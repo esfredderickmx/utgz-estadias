@@ -1,15 +1,21 @@
 <div class="ui tiny test modal" id="reset-modal" data-open-modal="{{ session('openResetModal', false) }}" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Restablecer contraseña</div>
-	<div class="ui justified content container">
+	<div class="content">
 		<p>¡Genial, has llegado al paso final para restablecer tu contraseña! Ingresa una nueva contraseña segura y confírmala para completar el proceso y recuperar el acceso a tu cuenta.</p>
 		<form class="ui form" id="reset-form" wire:submit.prevent="resetPassword" wire:reset="resetForm" wire:loading.class="loading">
 			@csrf
 			<input class="hide" name="token" type="hidden" wire:model="token">
 			<div class="field required {{ $errors->has('username') ? 'error' : '' }}">
-				<label>Matrícula / número de control</label>
+				<label>Correo {{ !$foreign ? 'institucional' : 'electrónico' }}</label>
 				<div class="ui left icon input">
-          <input id="reset_username" name="reset_username" type="text" wire:model="username" readonly autocomplete="off">
+          <input id="username" name="username" type="text" wire:model="username" readonly autocomplete="off">
 					<i class="envelope icon outline"></i>
+				</div>
+			</div>
+			<div class="field">
+				<div class="ui read-only checkbox">
+					<input id="foreign" name="foreign" type="checkbox" wire:model="foreign">
+					<label>Se usa un correo externo a la universidad</label>
 				</div>
 			</div>
 			<div class="field required {{ $errors->has('password') ? 'error' : '' }}">

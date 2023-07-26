@@ -27,19 +27,8 @@
 	</main>
 
 	@include('layouts.partials.footer')
-	@auth 
-	@livewire('users.user-profile')
-	@endauth 
-
-	@guest
-		@livewire('authentication.login')
-		@include('auth.register')
-		@livewire('authentication.password.forgot')
-		@livewire('authentication.password.reset', ['token' => session('token', null), 'username' => session('username', null)])
-	@endguest
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
-	{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 	<script type="text/javascript" src="{{ asset('js/semantic.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
 	@livewireScripts

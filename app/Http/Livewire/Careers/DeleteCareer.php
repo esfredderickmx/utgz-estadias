@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Careers;
 
 use App\Models\Career;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class DeleteCareer extends Component {
@@ -17,6 +18,8 @@ class DeleteCareer extends Component {
 
   public function destroyCareer() {
     $this->career->delete();
+    
+    Storage::delete('public/images/careers/' . $this->career->image);
 
     return $this->emit('deleted-entity', 'career', $this->career->id, 'Los datos de la carrera de ' . $this->career->name . ' ' . $this->career->context ?? '' . 'han sido eliminados correctamente.');
   }
