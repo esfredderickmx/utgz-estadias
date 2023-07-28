@@ -26,6 +26,10 @@
 		@yield('content', $slot ?? '')
 	</main>
 
+	@auth 
+	@livewire('users.user-profile')
+	@endauth
+
 	@include('layouts.partials.footer')
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>

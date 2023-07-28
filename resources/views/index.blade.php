@@ -70,9 +70,7 @@
 			</div>
 		</div>
 
-		@auth 
-	@livewire('users.user-profile')
-	@endauth
+	
 	
 		@guest
 			@livewire('authentication.login')

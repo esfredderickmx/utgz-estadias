@@ -1,33 +1,73 @@
 <div class="ui modal tiny" id="user-profile-modal" wire:ignore.self>
-    <div class="header">
-        Editar Perfil
-    </div>
+    <div class="ui vertical teal inverted segment huge header">Perfil de Usuario</div>
     <div class="content">
-        <div class="ui form">
-            <div class="field">
+        <form class="ui form" id="user-profile-form" wire:submit.prevent="editProfile" wire:reset="resetForm"
+            wire:loading.class="loading">
+            <div class="field required {{ $errors->has('user.first_name') ? 'error' : '' }}">
                 <label>Nombre</label>
-                <input wire:model="user.first_name" type="text" placeholder="Nombre">
-                @error('user.first_name') <span class="error">{{ $message }}</span> @enderror
+                <div class="ui left icon input">
+                    <input id="first_name" name="first_name" wire:model="user.first_name" type="text"
+                        placeholder="Nombre">
+                    <i class="icon quote right "></i>
+                </div>
             </div>
-            <div class="field">
+            <div class="field required {{ $errors->has('user.last_name') ? 'error' : '' }}">
                 <label>Apellido</label>
-                <input wire:model="user.last_name" type="text" placeholder="Apellido">
-                @error('user.last_name') <span class="error">{{ $message }}</span> @enderror
+                <div class="ui left icon input">
+                    <input id="last_nama" name="last_name" wire:model="user.last_name" type="text"
+                        placeholder="Apellido">
+                    <i class="icon quote left"></i>
+                </div>
+            </div>
+            <div class="field required {{ $errors->has('user.phone') ? 'error' : '' }}">
+                <label>Número de teléfono</label>
+                <div class="ui left icon input">
+                    <input id="phone" name="phone" wire:model="user.phone" type="text" placeholder="Número de teléfono">
+                    <i class="icon phone alternate"></i>
+                </div>
             </div>
             <div class="field">
-                <label>Número de teléfono</label>
-                <input wire:model="user.phone" type="text" placeholder="Número de teléfono">
-                @error('user.phone') <span class="error">{{ $message }}</span> @enderror
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" name="edit_pass" id="edit_pass" wire:model="edit_pass">
+                    <label>Modificar también la contraseña</label>
+                </div>
             </div>
-            <!-- <div class="field">
+
+            @if($edit_pass)
+            <div class="field required {{ $errors->has('password') ? 'error' : '' }}">
                 <label>Contraseña</label>
-                <input wire:model="user.password" type="password" placeholder="Contraseña">
-                @error('user.password') <span class="error">{{ $message }}</span> @enderror
-            </div> -->
-        </div>
+                <div class="ui right action left icon input">
+                    <input id="password" name="password" wire:model="password" type="password" placeholder="Contraseña">
+                    <i class="icon lock"></i>
+                    <div class="ui icon toggle button" data-inverted data-tooltip="Mostrar contraseña"
+                        data-variation="tiny" data-position="bottom right">
+                        <i class="eye slash icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field required {{ $errors->has('password_confirmation') ? 'error' : '' }}">
+                <label>Confirmar contraseña</label>
+                <div class="ui right action left icon input">
+                    <input id="password_confirmation" name="password_confirmation" wire:model="password_confirmation"
+                        type="password" placeholder="Confirmar contraseña">
+                    <i class="icon unlock"></i>
+                    <div class="ui icon toggle button" data-inverted data-tooltip="Mostrar contraseña"
+                        data-variation="tiny" data-position="bottom right">
+                        <i class="eye slash icon"></i>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </form>
+
+        @include('layouts.partials.messages')
+
     </div>
+
     <div class="actions">
-        <button class="ui primary button" wire:click="updateUser">Guardar</button>
-        <button class="ui button" wire:click="$emit('closeModal')">Cancelar</button>
+        <button class="ui cancel grey button" form="user-profile-form" type="reset">Cancelar</button>
+        <button class="ui teal right labeled icon button" form="user-profile-form" type="submit"
+            wire:loading.class="loading" wire:loading.attr="disabled" wire:target="editProfile">Guardar</button>
     </div>
 </div>

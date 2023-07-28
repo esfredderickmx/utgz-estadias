@@ -4,19 +4,26 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
+
 
 class UserProfile extends Component
 {
     public User $user;
     public $initial_state;
+    public $password;
+    public $password_confirmation;
+    public $edit_pass=false;
 
     protected function rules(){
         return [
             'user.first_name' => 'required|string|max:75',
             'user.last_name' => 'required|string|max:75',
             'user.phone' => 'required|numeric|digits:10',
-            'user.password' => [
+            'edit_pass'=>'boolean',
+            'password' => [
+              Rule::excludeIf(!$this->edit_pass),
                 'required',
                 'string',
                 'min:12',
@@ -33,7 +40,10 @@ class UserProfile extends Component
                   }
                 },
               ],
-              'user.password_confirmation' => 'same:password'
+              'password_confirmation' => [
+                Rule::excludeIf(!$this->edit_pass),
+                'same:password'
+              ]
             ];
     }
     public function mount()
@@ -51,19 +61,29 @@ class UserProfile extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function updateProfile()
+    public function editProfile()
     {
-        // $validatedData = $this->validate([
-        //     'name' => 'required|string|max:255',
-        //     'lastName' => 'required|string|max:255',
-        //     'phoneNumber' => 'required|string|max:20',
-        //     'password' => 'nullable|string|min:12',
-        // ]);
+      $current_state = $this->user->getAttributes();
+    $differences = array_diff_assoc($this->initial_state, $current_state);
 
+    if($this->edit_pass && !$this->password && !$this->password_confirmation && empty($differences)) {
+      return session()->flash('info', 'Aún no se realizan cambios en la información del usuario.');
+    }
 
-        // session()->flash('message', 'Perfil actualizado correctamente.');
+      $validated=$this->validate();
+      if($this->password){
+        $validated['password']=$this->password;
+      };
+      $this->user->update($validated);
+      $this->initial_state=$this->user->getAttributes();
+      $this->resetForm();
+      return $this->emit('updated-profile','La información del perfil ha sido actualizada correctamente.');
+    }
 
-        
+    public function resetForm() {
+      $this->user->fill($this->initial_state);
+      $this->reset("password","password_confirmation","edit_pass");
+      $this->resetErrorBag();
     }
 
     
