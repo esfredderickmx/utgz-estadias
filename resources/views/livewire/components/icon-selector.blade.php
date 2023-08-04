@@ -1,6 +1,6 @@
 <div class="ui small modal" id="select-icon-{{ $entity_type === 'create' ? 'create' : $entity_id }}-modal" modal-status="uninitialized" wire:ignore.self>
 	<div class="ui vertical teal inverted segment huge header">Seleccionar icono</div>
-	<div class="content">
+	<div class="scrolling content">
 		<form class="ui form" id="select-icon-{{ $entity_type === 'create' ? 'create' : $entity_id }}-form" wire:submit.prevent="selectIcon" wire:reset="clearSearch">
 			<div class="two fields">
 				<div class="field">

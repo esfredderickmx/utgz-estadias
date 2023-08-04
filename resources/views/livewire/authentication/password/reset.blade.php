@@ -8,22 +8,19 @@
 			<div class="field required {{ $errors->has('username') ? 'error' : '' }}">
 				<label>Correo {{ !$foreign ? 'institucional' : 'electrónico' }}</label>
 				<div class="ui left icon input">
-          <input id="username" name="username" type="text" wire:model="username" readonly autocomplete="off">
+					<input id="username" name="username" type="text" wire:model="username" readonly autocomplete="off">
 					<i class="envelope icon outline"></i>
 				</div>
-			</div>
-			<div class="field">
-				<div class="ui read-only checkbox">
-					<input id="foreign" name="foreign" type="checkbox" wire:model="foreign">
-					<label>Se usa un correo externo a la universidad</label>
-				</div>
+				@if ($foreign)
+					<span class="ui teal text">Este correo es externo a la universidad</span>
+				@endif
 			</div>
 			<div class="field required {{ $errors->has('password') ? 'error' : '' }}">
 				<label>Contraseña nueva</label>
 				<div class="ui right action left icon input">
-          <input id="reset_password" name="reset_password" type="password" wire:model="password" autofocus autocomplete="off" placeholder="Ingresa una contraseña">
-          <i class="lock icon"></i>
-					<div class="ui icon toggle button pop password state" data-content="Alternar visibilidad" data-variation="basic inverted">
+					<input id="reset_password" name="reset_password" type="password" wire:model="password" autofocus autocomplete="off" placeholder="Ingresa una contraseña">
+					<i class="lock icon"></i>
+					<div class="ui icon toggle button" data-inverted data-tooltip="Mostrar contraseña" data-variation="tiny" data-position="bottom right">
 						<i class="eye slash icon"></i>
 					</div>
 				</div>
@@ -31,9 +28,9 @@
 			<div class="field required {{ $errors->has('password_confirmation') ? 'error' : '' }}">
 				<label>Confirmar contraseña</label>
 				<div class="ui right action left icon input">
-          <input id="reset_password_confirmation" name="reset_password_confirmation" type="password" wire:model="password_confirmation" autocomplete="off" placeholder="Confirma tu contraseña">
-          <i class="unlock icon"></i>
-					<div class="ui icon toggle button pop password state" data-content="Alternar visibilidad" data-variation="basic inverted">
+					<input id="reset_password_confirmation" name="reset_password_confirmation" type="password" wire:model="password_confirmation" autocomplete="off" placeholder="Confirma tu contraseña">
+					<i class="unlock icon"></i>
+					<div class="ui icon toggle button" data-inverted data-tooltip="Mostrar contraseña" data-variation="tiny" data-position="bottom right">
 						<i class="eye slash icon"></i>
 					</div>
 				</div>

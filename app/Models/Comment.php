@@ -12,6 +12,7 @@ class Comment extends Model
 
     protected $fillable = [
       'user_id',
+      'process_id',
       'review_id',
       'message',
       'date',
@@ -20,6 +21,10 @@ class Comment extends Model
 
     public function user(): BelongsTo {
       return $this->belongsTo(User::class);
+    }
+
+    public function process(): BelongsTo {
+      return $this->belongsTo(Process::class);
     }
 
     public function review(): BelongsTo {

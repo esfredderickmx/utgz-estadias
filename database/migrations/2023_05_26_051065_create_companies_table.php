@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone', 10)->unique();
             $table->string('street');
             $table->string('number');
-            $table->integer('zip');
+            $table->string('zip', 5);
             $table->string('division');
             $table->string('city');
             $table->string('state');
