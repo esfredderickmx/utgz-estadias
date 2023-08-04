@@ -70,6 +70,8 @@
 			</div>
 		</div>
 
+	
+	
 		@guest
 			@livewire('authentication.login')
 			@livewire('authentication.verify-access')

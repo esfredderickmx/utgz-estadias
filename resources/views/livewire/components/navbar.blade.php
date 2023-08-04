@@ -25,7 +25,7 @@
 				<i class="dropdown icon"></i>
 				<div class="menu">
 					<div class="header">Mi cuenta</div>
-					<a class="item"><i class="user icon outline"></i>Perfil de usuario</a>
+					<div class="item" target-modal="user-profile-modal"><i class="user icon outline"></i>Perfil de usuario</div>
 					@if (Auth::user()->role === 'super' || Auth::user()->role === 'admin' || Auth::user()->role === 'manager')
 						<div class="item {{ Route::currentRouteName() === 'areas' || Route::currentRouteName() === 'careers' ? 'active' : '' }}">
 							<i class="dropdown icon"></i>
@@ -58,12 +58,12 @@
 		@endguest
 	</div>
 
-	<div>
-		@if (Session::get('logged-out', false))
-			@php
-				$message = Session::get('logged-out');
-			@endphp
-			<input id="session-info" type="hidden" value="{{ $message }}">
-		@endif
-	</div>
+    <div>
+        @if (Session::get('logged-out', false))
+        @php
+        $message = Session::get('logged-out');
+        @endphp
+        <input id="session-info" type="hidden" value="{{ $message }}">
+        @endif
+    </div>
 </div>

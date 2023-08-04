@@ -76,3 +76,4 @@
   
   @livewire('areas.create-area')
 </div>
+</div>

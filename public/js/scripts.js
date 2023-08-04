@@ -157,6 +157,14 @@ $(document).ready(function () {
     }, 500);
   });
 
+  Livewire.on('updated-profile', function (message) {
+    $('#user-profile-modal').modal('hide');
+
+    setTimeout(function () {
+      Livewire.emit('toast', 'success', message);
+    }, 500);
+  });
+
   Livewire.on('created-entity', function (entity, message) {
     $('#create-' + entity + '-modal').modal('hide');
 
