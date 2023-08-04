@@ -10,6 +10,8 @@ class CreateArea extends Component {
   public $icon;
   public $name;
   public $description;
+  
+  protected $listeners = ['icon-selection' => 'setIcon'];
 
   protected function rules() {
     return [
@@ -18,7 +20,6 @@ class CreateArea extends Component {
       'description' => 'required|string|max:400'
     ];
   }
-  protected $listeners = ['icon-selection' => 'setIcon'];
 
   public function render() {
     return view('livewire.areas.create-area');

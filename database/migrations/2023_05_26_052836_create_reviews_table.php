@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('process_id');
             $table->integer('number');
+            $table->text('instructions');
             $table->enum('status', ['pending', 'reviewing', 'rejected', 'approved'])->default('pending');
             $table->date('limit_date');
             $table->timestamps();

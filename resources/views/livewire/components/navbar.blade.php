@@ -7,17 +7,15 @@
 					<a class="item {{ Route::currentRouteName() === 'index' || Route::currentRouteName() === 'home' ? 'active' : '' }}" href="{{ route('home') }}"><i class="university icon"></i>Inicio</a>
 					<div class="divider"></div>
 					<div class="header">Estadías</div>
-					<a class="item"><i class="calendar icon outline"></i>Periodos</a>
-					<a class="item"><i class="clipboard icon outline"></i>Proceso</a>
-					<a class="item"><i class="folder open icon outline"></i>Documentos</a>
+					<a class="item {{ Route::currentRouteName() === 'processes' ? 'active' : '' }}" href="{{ route('processes') }}"><i class="clipboard icon outline"></i>Procesos</a>
+					<a class="item"><i class="folder open icon outline"></i>Documentación</a>
 				</div>
 			</div>
 		</div>
 		<div class="tablet computer only row">
 			<a class="item {{ Route::currentRouteName() === 'index' || Route::currentRouteName() === 'home' ? 'active' : '' }}" href="{{ route('home') }}">Inicio</a>
-			<a class="item">Periodos</a>
-			<a class="item">Proceso</a>
-			<a class="item">Documentos</a>
+			<a class="item {{ Route::currentRouteName() === 'processes' ? 'active' : '' }}" href="{{ route('processes') }}">Procesos</a>
+			<a class="item">Documentación</a>
 		</div>
 	</div>
 	<div class="right menu">

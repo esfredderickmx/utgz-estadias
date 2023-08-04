@@ -16,8 +16,8 @@
 				<label>Año</label>
 				<div class="ui calendar" data-type="year">
 					<div class="ui input left icon">
+            <input id="year" name="year" type="number" wire:model.lazy="period.year" autocomplete="off" placeholder="Seleccionar año">
 						<i class="calendar icon"></i>
-						<input id="year" name="year" type="number" wire:model.lazy="period.year" autocomplete="off" placeholder="Seleccionar año">
 					</div>
 				</div>
 			</div>

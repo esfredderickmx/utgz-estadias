@@ -45,7 +45,7 @@
         <div class="two fields">
           <div class="five wide field required {{ $errors->has('company.zip') ? 'error' : '' }}">
             <div class="ui left icon input">
-              <input id="zip" name="zip" type="number" wire:model="company.zip" autocomplete="off" placeholder="C.P.">
+              <input id="zip" name="zip" type="text" maxlength="5" wire:model="company.zip" autocomplete="off" placeholder="C.P.">
               <i class="hashtag icon"></i>
             </div>
           </div>

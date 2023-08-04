@@ -36,7 +36,7 @@
 					<select class="ui search selection dropdown" id="adviser_id" name="adviser_id" {{ $process->status === 'approved' || $process->status === 'unapproved' ? 'disabled' : '' }} wire:model="adviser_id">
 						<option value="">Seleccionar asesor</option>
 						@foreach ($advisers as $adviser)
-							<option value="{{ $adviser->id }}">{{ strtok($adviser->first_name, ' ') . ' ' . strtok($adviser->last_name, ' ') }}</option>
+							<option value="{{ $adviser->id }}">{{ strtok($adviser->first_name, ' ') . ' ' . strtok($adviser->last_name, ' ') }} del área de {{ $adviser->area->name }}</option>
 						@endforeach
 					</select>
 				</div>

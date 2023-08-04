@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('review_id');
+            $table->unsignedBigInteger('process_id')->nullable();
+            $table->unsignedBigInteger('review_id')->nullable();
             $table->text('message');
             $table->date('date');
             $table->time('time');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('process_id')->references('id')->on('processes')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('review_id')->references('id')->on('reviews')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }

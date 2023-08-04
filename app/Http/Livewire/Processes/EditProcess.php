@@ -26,10 +26,10 @@ class EditProcess extends Component {
 
   protected function rules() {
     return [
-      'process.period_id' => 'required|exists:periods,id',
-      'process.company_id' => 'required|exists:companies,id',
-      'student_id' => 'required|exists:users,id',
-      'adviser_id' => 'required|exists:users,id',
+      'process.period_id' => 'required|integer|exists:periods,id',
+      'process.company_id' => 'required|integer|exists:companies,id',
+      'student_id' => 'required|integer|exists:users,id',
+      'adviser_id' => 'required|integer|exists:users,id',
       'process.attempt' => [
         Rule::excludeIf(!$this->process->student_id),
         'required',
@@ -44,17 +44,26 @@ class EditProcess extends Component {
   }
 
   public function mount() {
-    $this->initial_student =$this->student_id = $this->process->student->first()->id;
+    $this->initial_student = $this->student_id = $this->process->student->first()->id;
     $this->initial_adviser = $this->adviser_id = $this->process->adviser->first()->id;
     $this->initial_state = $this->process->getAttributes();
+
+    // Verificamos si los elementos existen en el array y luego los eliminamos
+    if (array_key_exists('period_year', $this->initial_state)) {
+      unset($this->initial_state['period_year']);
+    }
+
+    if (array_key_exists('period_quarter', $this->initial_state)) {
+      unset($this->initial_state['period_quarter']);
+    }
   }
 
   public function render() {
     $this->periods = Period::query()->orderBy('year')->orderBy('quarter')->get();
     $this->companies = Company::query()->orderBy('name')->get();
     $this->students = User::query()->where('role', 'student')->orderBy('code')->get();
-    $this->advisers = User::query()->where('role', 'adviser')->orderBy('first_name')->orderBy('last_name')->get();
-    
+    $this->advisers = User::query()->select('users.*', 'areas.name as area_name')->where('role', 'adviser')->join('areas', 'users.area_id', '=', 'areas.id')->orderBy('areas.name')->orderBy('first_name')->orderBy('last_name')->get();
+
     return view('livewire.processes.edit-process', [
       'periods' => $this->periods,
       'companies' => $this->companies,
@@ -120,7 +129,7 @@ class EditProcess extends Component {
     $this->process->users()->sync([$this->student_id, $this->adviser_id]);
 
     $this->initial_state = $this->process->getAttributes();
-    $this->initial_student =$this->student_id;
+    $this->initial_student = $this->student_id;
     $this->initial_adviser = $this->adviser_id;
 
     $this->resetForm();

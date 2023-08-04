@@ -22,7 +22,7 @@
 				</div>
 				<div class="row">
 					<div class="center aligned column">
-						<div class="ui huge grey animated fade button">
+						<div class="ui huge grey animated fade button" target-modal="verify-access-modal">
 							<div class="content visible">¿Ya es mi turno?</div>
 							<div class="content hidden">Comprobar</div>
 						</div>
@@ -72,7 +72,7 @@
 
 		@guest
 			@livewire('authentication.login')
-			@include('auth.register')
+			@livewire('authentication.verify-access')
 			@livewire('authentication.password.forgot')
 			@livewire('authentication.password.reset', ['token' => session('token', null), 'username' => session('username', null)])
 		@endguest

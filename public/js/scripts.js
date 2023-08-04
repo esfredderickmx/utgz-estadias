@@ -17,7 +17,11 @@ $(document).ready(function () {
     }
   });
 
-  $('.ui.calendar').calendar();
+  $('.ui.calendar').calendar({
+    formatter: {
+      date: 'YYYY-MM-DD'
+    }
+  });
 
   $('#navbar-segment').visibility({
     once: false,
@@ -196,6 +200,14 @@ $(document).ready(function () {
       deleteModal.modal('destroy');
     }, 500);
   });
+  
+  Livewire.on('comment-added', function (message) {
+    Livewire.emit('refresh');
+
+    setTimeout(function () {
+      Livewire.emit('toast', 'success', message);
+    }, 500);
+  });
 
   Livewire.on('selected-icon', function (type, id) {
     if (type === 'create') {
@@ -272,7 +284,11 @@ $(document).on('livewire:update', function () {
     }
   });
 
-  $('.ui.calendar').calendar();
+  $('.ui.calendar').calendar({
+    formatter: {
+      date: 'YYYY-MM-DD'
+    }
+  });
 
   $("[modal-status='uninitialized']").each(function () {
     $(this).modal({

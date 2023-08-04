@@ -27,10 +27,10 @@ class CreateProcess extends Component {
 
   protected function rules() {
     return [
-      'period_id' => 'required|exists:periods,id',
-      'company_id' => 'required|exists:companies,id',
-      'student_id' => 'required|exists:users,id',
-      'adviser_id' => 'required|exists:users,id',
+      'period_id' => 'required|integer|exists:periods,id',
+      'company_id' => 'required|integer|exists:companies,id',
+      'student_id' => 'required|integer|exists:users,id',
+      'adviser_id' => 'required|integer|exists:users,id',
       'attempt' => [
         Rule::excludeIf(!$this->student_id),
         'required',
@@ -48,7 +48,7 @@ class CreateProcess extends Component {
     $this->periods = Period::query()->orderBy('year')->orderBy('quarter')->get();
     $this->companies = Company::query()->orderBy('name')->get();
     $this->students = User::query()->where('role', 'student')->orderBy('code')->get();
-    $this->advisers = User::query()->where('role', 'adviser')->orderBy('first_name')->orderBy('last_name')->get();
+    $this->advisers = User::query()->select('users.*', 'areas.name as area_name')->where('role', 'adviser')->join('areas', 'users.area_id', '=', 'areas.id')->orderBy('areas.name')->orderBy('first_name')->orderBy('last_name')->get();
 
     return view('livewire.processes.create-process', [
       'periods' => $this->periods,

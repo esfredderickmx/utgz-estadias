@@ -14,6 +14,7 @@ class Review extends Model
     protected $fillable = [
       'process_id',
       'number',
+      'instructions',
       'status',
       'limit_date'
     ];

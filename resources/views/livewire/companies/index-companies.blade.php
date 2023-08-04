@@ -23,7 +23,7 @@
       </form>
   
       <div class="ui vertical basic segment">
-        <table class="ui selectable single line very basic celled table">
+        <table class="ui selectable very basic celled table">
           <thead>
             <tr class="center aligned">
               <th>Nombre</th>

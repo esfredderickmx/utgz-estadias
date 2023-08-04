@@ -28,7 +28,7 @@
 						<i class="eye slash icon"></i>
 					</div>
 				</div>
-        <button class="ui teal tertiary button" target-modal="forgot-modal" tabindex="-1" type="reset">¿Olvidaste tu contraseña?</button>
+				<button class="ui teal tertiary button" target-modal="forgot-modal" tabindex="-1" type="reset">¿Olvidaste tu contraseña?</button>
 			</div>
 			<div class="field">
 				<div class="ui checkbox">

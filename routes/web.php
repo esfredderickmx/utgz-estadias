@@ -8,6 +8,8 @@ use App\Http\Livewire\Companies\IndexCompanies;
 use App\Http\Livewire\Users\IndexUsers;
 use App\Http\Livewire\Periods\IndexPeriods;
 use App\Http\Livewire\Processes\IndexProcesses;
+use App\Http\Livewire\Processes\ProcessDetail;
+use App\Models\Process;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,4 +43,6 @@ Route::get('/companies', IndexCompanies::class)->name('companies')->middleware([
 
 Route::get('/periods', IndexPeriods::class)->name('periods')->middleware(['auth', 'role:super,admin,manager']);
 
-Route::get('/processes', IndexProcesses::class)->name('processes')->middleware(['auth', 'role:super,admin,manager']);
+Route::get('/processes', IndexProcesses::class)->name('processes')->middleware('auth');
+
+Route::get('/processes/process-{process}', ProcessDetail::class)->name('process.show')->middleware('auth');
